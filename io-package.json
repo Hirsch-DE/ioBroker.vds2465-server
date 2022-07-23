@@ -16,7 +16,6 @@
         "zh-cn": "首次出版"
       }
     },
-    "title": "VdS2465-Server",
     "titleLang": {
       "en": "VdS2465-Server",
       "de": "VdS2465-Server",
@@ -72,8 +71,7 @@
     "supportCustoms": false,
     "dependencies": [
       {
-        "js-controller": ">=2.0.0",
-		"admin": ">=5.0.0"
+        "js-controller": ">=2.0.0"
       }
     ],
     "installedFrom": ""
