@@ -1,0 +1,158 @@
+{
+  "type": "tabs",
+  "items": {
+    "mainTab": {
+      "type": "panel",
+      "label": "Main settings",
+      "items": {
+        "bindIP": {
+          "type": "ip",
+          "listenOnAllPorts": true,
+          "label": "IP",
+          "sm": 12,
+          "md": 8,
+          "lg": 5
+        },
+        "bindPort": {
+          "type": "number",
+          "min": 1,
+          "max": 65565,
+          "label": "Port",
+          "sm": 12,
+          "md": 4,
+          "lg": 3
+        },
+        "poolIntervall": {
+          "type": "number",
+          "min": 3,
+          "max": 8,
+          "label": "Pollintervall",
+          "help": "sec",
+          "sm": 12,
+          "md": 6,
+          "lg": 2
+        }
+      }
+    },
+    "devicesTab": {
+      "type": "panel",
+      "label": "Devices",
+      "items": {
+        "_explanation": {
+          "type": "staticText",
+          "text": "Parameter fuer die einzelnen Waehlgeraete"
+        },
+        "devices": {
+          "sm": 12,
+          "newLine": true,
+          "type": "table",
+          "items": [
+            {
+              "type": "number",
+              "title": "Identnummer",
+              "help": "Zahlen ohne fuehrende 0 (max 12 Stellen)",
+              "min": 1,
+              "max": 999999999999,
+              "attr": "identnr",
+              "filter": true,
+              "sort": true,
+              "default": "12345678"
+            },
+            {
+              "type": "checkbox",
+              "title": "stehend",
+              "attr": "stehend",
+              "filter": false,
+              "sort": false,
+              "default": true
+            },
+            {
+              "type": "number",
+              "newLine": true,
+              "title": "KeyNr",
+              "min": 0,
+              "max": 65534,
+              "attr": "keynr",
+              "help": "0 = unverschluesselt",
+              "filter": false,
+              "sort": false,
+              "default": 1
+            },
+            {
+              "type": "text",
+              "width": "50%",
+              "title": "Schluessel",
+              "help": "Erlaubt 0-9a-f und davon insgesamt 32 Zeichen",
+              "attr": "key",
+              "hidden": "data.keynr === 0",
+              "filter": false,
+              "sort": false,
+              "default": "11223344556677889900aabbccddeeff"
+            }
+          ]
+        }
+      }
+    },
+    "relaisTab": {
+      "type": "panel",
+      "label": "Relais",
+      "items": {
+        "_explanation": {
+          "type": "staticText",
+          "text": "Parameter fuer das Anlegen von Relais"
+        },
+        "relais": {
+          "sm": 12,
+          "newLine": true,
+          "type": "table",
+          "items": [
+            {
+              "type": "number",
+              "title": "Identnummer",
+              "help": "Zahlen ohne fuehrende 0 (max 12 Stellen)",
+              "min": 1,
+              "max": 999999999999,
+              "attr": "identnr",
+              "filter": true,
+              "sort": true,
+              "default": "12345678"
+            },
+            {
+              "type": "number",
+              "title": "Adresse",
+              "min": 1,
+              "max": 255,
+              "attr": "adr",
+              "help": "1 - 255",
+              "filter": true,
+              "sort": true,
+              "default": 1
+            },
+            {
+              "type": "number",
+              "title": "Geraet",
+              "min": 0,
+              "max": 7,
+              "attr": "ge",
+              "help": "0 - 7",
+              "filter": false,
+              "sort": false,
+              "default": 0
+            },
+            {
+              "type": "number",
+              "title": "Bereich",
+              "min": 0,
+              "max": 7,
+              "attr": "be",
+              "help": "0 - 7",
+              "filter": false,
+              "sort": false,
+              "default": 0
+            }
+          ]
+        }
+      }
+    }
+  }
+}

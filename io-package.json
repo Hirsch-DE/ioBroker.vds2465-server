@@ -1,0 +1,112 @@
+{
+  "common": {
+    "name": "vds2465-server",
+    "version": "0.0.1",
+    "news": {
+      "0.0.1": {
+        "en": "initial release",
+        "de": "Erstveröffentlichung",
+        "ru": "Начальная версия",
+        "pt": "lançamento inicial",
+        "nl": "Eerste uitgave",
+        "fr": "Première version",
+        "it": "Versione iniziale",
+        "es": "Versión inicial",
+        "pl": "Pierwsze wydanie",
+        "zh-cn": "首次出版"
+      }
+    },
+    "title": "VdS2465-Server",
+    "titleLang": {
+      "en": "VdS2465-Server",
+      "de": "VdS2465-Server",
+      "ru": "VdS2465-Server",
+      "pt": "VdS2465-Server",
+      "nl": "VdS2465-Server",
+      "fr": "VdS2465-Server",
+      "it": "VdS2465-Server",
+      "es": "VdS2465-Server",
+      "pl": "VdS2465-Server",
+      "zh-cn": "VdS2465-Server"
+    },
+    "desc": {
+      "en": "Recipients of VdS2465 reports",
+	  "de": "Empfänger von VdS2465-Meldungen",
+      "ru": "Получатели отчетов VdS2465",
+      "pt": "Recipientes de relatórios VdS2465",
+      "nl": "Ontvangers van VdS2465-rapporten",
+      "fr": "Bénéficiaires des rapports VdS2465",
+      "it": "Recipienti delle relazioni VdS2465",
+      "es": "Recipientes de los informes VdS2465",
+      "pl": "Raport VdS2465",
+      "zh-cn": "VdS2465报告的答复"
+    },
+    "authors": [
+      "Hirsch-DE <github731@hirschfeldonline.de>"
+    ],
+    "keywords": [
+      "Alarm",
+      "EMZ",
+      "NSL"
+    ],
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "main": "main.js",
+    "icon": "vds2465-server.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/Hirsch-DE/ioBroker.vds2465-server/main/admin/vds2465-server.png",
+    "readme": "https://github.com/Hirsch-DE/ioBroker.vds2465-server/blob/main/README.md",
+    "loglevel": "info",
+    "mode": "daemon",
+    "type": "alarm",
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "poll",
+    "tier": 3,
+    "messagebox": true,
+    "materialize": false,
+    "materializeTab": false,
+    "adminUI": {
+      "config": "json"
+    },
+    "supportCustoms": false,
+    "dependencies": [
+      {
+        "js-controller": ">=2.0.0",
+		"admin": ">=5.0.0"
+      }
+    ],
+    "installedFrom": ""
+  },
+  "native": {
+    "bindIP": "0.0.0.0",
+    "bindPort": 4100,
+    "poolIntervall": 5,
+    "devices": [],
+    "relais": []
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "Device or service connected",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
+  ]
+}
