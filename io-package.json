@@ -30,7 +30,7 @@
     },
     "desc": {
       "en": "Recipients of VdS2465 reports",
-	  "de": "Empfänger von VdS2465-Meldungen",
+      "de": "Empfänger von VdS2465-Meldungen",
       "ru": "Получатели отчетов VdS2465",
       "pt": "Recipientes de relatórios VdS2465",
       "nl": "Ontvangers van VdS2465-rapporten",
@@ -69,6 +69,11 @@
       "config": "json"
     },
     "supportCustoms": false,
+    "globalDependencies": [
+      {
+        "admin": ">=5.1.28"
+      }
+    ],
     "dependencies": [
       {
         "js-controller": ">=2.0.0"
