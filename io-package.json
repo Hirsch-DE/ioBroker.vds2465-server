@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "vds2465-server",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "news": {
+      "0.0.2": {
+        "en": "Added other languages in settings dialog\nvarious small adjustments",
+        "de": "Weitere Sprachen im Einstelldialog hinzugefügt\ndiverse kleine Anpassungen",
+        "ru": "Добавлены другие языки в диалоге настроек\nразличные небольшие настройки",
+        "pt": "Adicionado outros idiomas em configurações diálogo\nvários pequenos ajustes",
+        "nl": "Andere talen toegevoegd in het instellingenvenster\nverschillende kleine aanpassingen",
+        "fr": "Ajout d'autres langues dans le dialogue Paramètres\ndivers petits ajustements",
+        "it": "Aggiunto altre lingue nella finestra di dialogo delle impostazioni\nvari piccoli aggiustamenti",
+        "es": "Añadido otros idiomas en el diálogo de configuración\ndiversos pequeños ajustes",
+        "pl": "Inne języki w tworzeniu dialogów\nróżne małe przystosowanie",
+        "zh-cn": "在提示环境中添加其他语文\n各种小额调整"
+      },
       "0.0.1": {
         "en": "initial release",
         "de": "Erstveröffentlichung",
@@ -19,13 +31,13 @@
     "titleLang": {
       "en": "VdS2465-Server",
       "de": "VdS2465-Server",
-      "ru": "VdS2465-Server",
+      "ru": "ВдС2465-Сервер",
       "pt": "VdS2465-Server",
-      "nl": "VdS2465-Server",
+      "nl": "VdS2465",
       "fr": "VdS2465-Server",
       "it": "VdS2465-Server",
       "es": "VdS2465-Server",
-      "pl": "VdS2465-Server",
+      "pl": "VdS2465",
       "zh-cn": "VdS2465-Server"
     },
     "desc": {
@@ -61,7 +73,7 @@
     "compact": true,
     "connectionType": "local",
     "dataSource": "poll",
-    "tier": 3,
+    "tier": 2,
     "messagebox": true,
     "materialize": false,
     "materializeTab": false,
@@ -78,13 +90,12 @@
       {
         "js-controller": ">=2.0.0"
       }
-    ],
-    "installedFrom": ""
+    ]
   },
   "native": {
     "bindIP": "0.0.0.0",
     "bindPort": 4100,
-    "poolIntervall": 5,
+    "pollIntervall": 5,
     "devices": [],
     "relais": []
   },

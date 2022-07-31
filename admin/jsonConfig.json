@@ -3,7 +3,18 @@
   "items": {
     "mainTab": {
       "type": "panel",
-      "label": "Main settings",
+      "label": {
+        "en": "Main settings",
+        "de": "Haupteinstellungen",
+        "ru": "Основные настройки",
+        "pt": "Configurações principais",
+        "nl": "Hoofdinstellingen",
+        "fr": "Paramètres principaux",
+        "it": "Impostazioni principali",
+        "es": "Ajustes principales",
+        "pl": "Główne ustawienie",
+        "zh-cn": "主要环境"
+      },
       "items": {
         "bindIP": {
           "type": "ip",
@@ -17,17 +28,50 @@
           "type": "number",
           "min": 1,
           "max": 65565,
-          "label": "Port",
+          "label": {
+            "en": "port",
+            "de": "Port",
+            "ru": "порт",
+            "pt": "porto",
+            "nl": "port",
+            "fr": "port",
+            "it": "porto",
+            "es": "puerto",
+            "pl": "port",
+            "zh-cn": "港口"
+          },
           "sm": 12,
           "md": 4,
           "lg": 3
         },
-        "poolIntervall": {
+        "pollIntervall": {
           "type": "number",
           "min": 3,
           "max": 8,
-          "label": "Pollintervall",
-          "help": "sec",
+          "label": {
+            "en": "poll interval",
+            "de": "Pollintervall",
+            "ru": "интервал опроса",
+            "pt": "intervalo de pesquisa",
+            "nl": "stemming",
+            "fr": "intervalle",
+            "it": "intervallo di sondaggio",
+            "es": "intervalo de encuesta",
+            "pl": "interwał",
+            "zh-cn": "投票间隔"
+          },
+          "help": {
+            "en": "sec",
+            "de": "sec",
+            "ru": "сек",
+            "pt": "- sim",
+            "nl": "wacht",
+            "fr": "sec",
+            "it": "secondo",
+            "es": "sec",
+            "pl": "sec",
+            "zh-cn": "安全"
+          },
           "sm": 12,
           "md": 6,
           "lg": 2
@@ -36,11 +80,33 @@
     },
     "devicesTab": {
       "type": "panel",
-      "label": "Devices",
+      "label": {
+        "en": "Devices",
+        "de": "Geräte",
+        "ru": "Устройства",
+        "pt": "Dispositivos",
+        "nl": "Vernietiging",
+        "fr": "Appareils",
+        "it": "Dispositivi",
+        "es": "Dispositivos",
+        "pl": "Device",
+        "zh-cn": "证人"
+      },
       "items": {
         "_explanation": {
           "type": "staticText",
-          "text": "Parameter fuer die einzelnen Waehlgeraete"
+          "text": {
+            "en": "Parameters for the individual dialing devices",
+            "de": "Parameter für die einzelnen Wähleinrichtungen",
+            "ru": "Параметры для индивидуальных устройств для набора",
+            "pt": "Parâmetros para dispositivos de marcação individuais",
+            "nl": "Parameters voor de individuele apparatuur",
+            "fr": "Paramètres pour les appareils de composition individuels",
+            "it": "Parametri per i singoli dispositivi di comporre",
+            "es": "Parámetros para los dispositivos de marcado individuales",
+            "pl": "Parametry dla poszczególnych urządzeń dialingowych",
+            "zh-cn": "个人厕所的参数"
+          }
         },
         "devices": {
           "sm": 12,
@@ -49,8 +115,30 @@
           "items": [
             {
               "type": "number",
-              "title": "Identnummer",
-              "help": "Zahlen ohne fuehrende 0 (max 12 Stellen)",
+              "title": {
+                "en": "identification number",
+                "de": "Identnummer",
+                "ru": "идентификационный номер",
+                "pt": "número de identificação",
+                "nl": "identificatienummer",
+                "fr": "numéro d ' identification",
+                "it": "numero di identificazione",
+                "es": "número de identificación",
+                "pl": "identyfikacja",
+                "zh-cn": "身份识别号码"
+              },
+              "help": {
+                "en": "Numbers without leading 0 (max 12 digits)",
+                "de": "Zahlen ohne führende 0 (max. 12 Ziffern)",
+                "ru": "Номера без ведущих 0 (максимум 12 цифр)",
+                "pt": "Números sem chumbo 0 (máx. 12 dígitos)",
+                "nl": "Nummers zonder te leiden 0 (max 12 cijfers)",
+                "fr": "Nombres sans tête 0 (max 12 chiffres)",
+                "it": "Numeri senza piombo 0 (max 12 cifre)",
+                "es": "Números sin plomo 0 (máximo 12 dígitos)",
+                "pl": "Liczby bez wskazania 0 (max 12)",
+                "zh-cn": "未领0.(12个数字)的数字"
+              },
               "min": 1,
               "max": 999999999999,
               "attr": "identnr",
@@ -60,7 +148,18 @@
             },
             {
               "type": "checkbox",
-              "title": "stehend",
+              "title": {
+                "en": "standing",
+                "de": "stehend",
+                "ru": "стоя",
+                "pt": "de pé",
+                "nl": "staan",
+                "fr": "debout",
+                "it": "in piedi",
+                "es": "de pie",
+                "pl": "stać",
+                "zh-cn": "常设职位"
+              },
               "attr": "stehend",
               "filter": false,
               "sort": false,
@@ -69,11 +168,33 @@
             {
               "type": "number",
               "newLine": true,
-              "title": "KeyNr",
+              "title": {
+                "en": "KeyNr",
+                "de": "Schlüsselnummer",
+                "ru": "KeyNr",
+                "pt": "Chaveiro",
+                "nl": "Keyn",
+                "fr": "KeyNr",
+                "it": "Chiave",
+                "es": "KeyNr",
+                "pl": "KeyNr",
+                "zh-cn": "主要国家"
+              },
               "min": 0,
               "max": 65534,
               "attr": "keynr",
-              "help": "0 = unverschluesselt",
+              "help": {
+                "en": "0 = unencrypted",
+                "de": "0 = unverschlüsselt",
+                "ru": "0 = незашифровано",
+                "pt": "0 = não criptografado",
+                "nl": "0 = onbewerkt",
+                "fr": "0 = non chiffré",
+                "it": "0 = non criptato",
+                "es": "0 = no cifrado",
+                "pl": "0 = unencrypted",
+                "zh-cn": "0 = 未加权"
+              },
               "filter": false,
               "sort": false,
               "default": 1
@@ -81,8 +202,30 @@
             {
               "type": "text",
               "width": "50%",
-              "title": "Schluessel",
-              "help": "Erlaubt 0-9a-f und davon insgesamt 32 Zeichen",
+              "title": {
+                "en": "Key",
+                "de": "Schlüssel",
+                "ru": "Ключ",
+                "pt": "Chaveiro",
+                "nl": "Sleutel",
+                "fr": "Key",
+                "it": "Chiave",
+                "es": "Clave",
+                "pl": "Key",
+                "zh-cn": "关键"
+              },
+              "help": {
+                "en": "Allows 0-9a-f and a total of 32 characters",
+                "de": "Erlaubt 0-9a-f und insgesamt 32 Zeichen",
+                "ru": "Позволяет 0-9a-f и в общей сложности 32 символа",
+                "pt": "Permite 0-9a-f e um total de 32 caracteres",
+                "nl": "Staat 0-9a-f toe en in totaal 32 tekens",
+                "fr": "Permet 0-9a-f et un total de 32 caractères",
+                "it": "Consente 0-9a-f e un totale di 32 caratteri",
+                "es": "Permite 0-9a-f y un total de 32 caracteres",
+                "pl": "Allows 0-9a-f oraz 32 postaci",
+                "zh-cn": "允许0.-9a-f和总计32种特点"
+              },
               "attr": "key",
               "hidden": "data.keynr === 0",
               "filter": false,
@@ -95,11 +238,33 @@
     },
     "relaisTab": {
       "type": "panel",
-      "label": "Relais",
+      "label": {
+        "en": "Relay",
+        "de": "Relais",
+        "ru": "Реле",
+        "pt": "Reposição",
+        "nl": "relais",
+        "fr": "Relay",
+        "it": "Relè",
+        "es": "Relay",
+        "pl": "Relay",
+        "zh-cn": "拖延"
+      },
       "items": {
         "_explanation": {
           "type": "staticText",
-          "text": "Parameter fuer das Anlegen von Relais"
+          "text": {
+            "en": "Parameters for creating relays",
+            "de": "Parameter für die Erstellung von Relais",
+            "ru": "Параметры для создания реле",
+            "pt": "Parâmetros para criar relés",
+            "nl": "Parameters voor het maken van relais",
+            "fr": "Paramètres pour créer des relais",
+            "it": "Parametri per la creazione di relè",
+            "es": "Parámetros para crear relés",
+            "pl": "Parametry do tworzenia przekaźników",
+            "zh-cn": "D. 造成重犯的参数"
+          }
         },
         "relais": {
           "sm": 12,
@@ -108,8 +273,30 @@
           "items": [
             {
               "type": "number",
-              "title": "Identnummer",
-              "help": "Zahlen ohne fuehrende 0 (max 12 Stellen)",
+              "title": {
+                "en": "identification number",
+                "de": "Identnummer",
+                "ru": "идентификационный номер",
+                "pt": "número de identificação",
+                "nl": "identificatienummer",
+                "fr": "numéro d ' identification",
+                "it": "numero di identificazione",
+                "es": "número de identificación",
+                "pl": "identyfikacja",
+                "zh-cn": "身份识别号码"
+              },
+              "help": {
+                "en": "Numbers without leading 0 (max 12 digits)",
+                "de": "Zahlen ohne führende 0 (max. 12 Ziffern)",
+                "ru": "Номера без ведущих 0 (максимум 12 цифр)",
+                "pt": "Números sem chumbo 0 (máx. 12 dígitos)",
+                "nl": "Nummers zonder te leiden 0 (max 12 cijfers)",
+                "fr": "Nombres sans tête 0 (max 12 chiffres)",
+                "it": "Numeri senza piombo 0 (max 12 cifre)",
+                "es": "Números sin plomo 0 (máximo 12 dígitos)",
+                "pl": "Liczby bez wskazania 0 (max 12)",
+                "zh-cn": "未领0.(12个数字)的数字"
+              },
               "min": 1,
               "max": 999999999999,
               "attr": "identnr",
@@ -119,7 +306,18 @@
             },
             {
               "type": "number",
-              "title": "Adresse",
+              "title": {
+                "en": "Address",
+                "de": "Adresse",
+                "ru": "Адрес",
+                "pt": "Endereço",
+                "nl": "Adres",
+                "fr": "Adresse",
+                "it": "Indirizzo",
+                "es": "Dirección",
+                "pl": "Addressa",
+                "zh-cn": "问题"
+              },
               "min": 1,
               "max": 255,
               "attr": "adr",
@@ -130,7 +328,18 @@
             },
             {
               "type": "number",
-              "title": "Geraet",
+              "title": {
+                "en": "Device",
+                "de": "Gerät",
+                "ru": "Устройства",
+                "pt": "Dispositivo",
+                "nl": "Vernietiging",
+                "fr": "Dispositif",
+                "it": "Dispositivo",
+                "es": "Dispositivo",
+                "pl": "Device",
+                "zh-cn": "证人"
+              },
               "min": 0,
               "max": 7,
               "attr": "ge",
@@ -141,7 +350,18 @@
             },
             {
               "type": "number",
-              "title": "Bereich",
+              "title": {
+                "en": "Area",
+                "de": "Bereich",
+                "ru": "Площадь",
+                "pt": "Área",
+                "nl": "Area",
+                "fr": "Zone",
+                "it": "Settore",
+                "es": "Zona",
+                "pl": "Area",
+                "zh-cn": "区域"
+              },
               "min": 0,
               "max": 7,
               "attr": "be",

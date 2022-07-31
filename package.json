@@ -1,6 +1,6 @@
 {
   "name": "iobroker.vds2465-server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Empfänger von VdS2465-Meldungen",
   "author": {
     "name": "Hirsch-DE",
@@ -63,6 +63,7 @@
   "files": [
     "admin{,/!(src)/**}/!(tsconfig|tsconfig.*).json",
     "admin{,/!(src)/**}/*.{html,css,png,svg,jpg,js}",
+    "!admin/i18n",
     "admin/build/",
     "lib/",
     "www/",

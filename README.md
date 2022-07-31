@@ -44,6 +44,9 @@ Von diesem Adapter wird auch das "Service Request" unterstützt, welches in eini
 
 ## Changelog
 
+### 0.0.2
+* (Hirsch-DE) Andere Sprachen in Einstelldialog hinzugefügt
+* (Hirsch-DE) diverse kleine Anpassungen
 ### 0.0.1
 * (Hirsch-DE) initial release
 

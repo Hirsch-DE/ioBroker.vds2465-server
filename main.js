@@ -35,7 +35,7 @@ class Vds2465Server extends utils.Adapter {
 		// this.on('objectChange', this.onObjectChange.bind(this));
 		this.on('message', this.onMessage.bind(this));
 		this.on('unload', this.onUnload.bind(this));
-		this.sendCommand.bind(this);
+		//this.sendCommand.bind(this);
 	}
 
 	/**
@@ -61,7 +61,7 @@ class Vds2465Server extends utils.Adapter {
 		}
 		catch (e) {
 			this.log.error(e + ' in onReady()');
-        }
+		}
 	
 		/*
 		For every state in the system there has to be also an object of type state
@@ -131,8 +131,8 @@ class Vds2465Server extends utils.Adapter {
 					let obj = devicesConnected.shift();
 					//this.setConnectState(obj.id, false, null);
 					obj.ae.disconnect();
-                }
-            }
+				}
+			}
 			callback();
 		} catch (e) {
 			callback();
@@ -272,11 +272,11 @@ class Vds2465Server extends utils.Adapter {
 			if (obj && typeof obj === 'object') {
 				this.log.debug('Daten von: ' + AE.Identnummer);
 				this.zerlegeDaten(AE.Identnummer === '' ? 'unbekannt' : AE.Identnummer, obj);
-            }
+			}
 		});
 
 		AE.setLogLevel(this.log.level);
-		AE.Polling = this.config.poolIntervall;
+		AE.Polling = this.config.pollIntervall;
 		if (this.config.devices.length > 0) {
 			this.config.devices.forEach((obj) => {
 				try {
@@ -308,11 +308,11 @@ class Vds2465Server extends utils.Adapter {
 	* Setzt den Verbindungszustand und speichert die Verweise
 	* @param {String} id Identnummer
 	* @param {Boolean} state Zustand
-    * @param {vds | null} AE Verwalter
+	* @param {vds | null} AE Verwalter
 	*/
 	async setConnectState(id, state, AE) {
 		try {
-			queueConnect.push({ 'id': id, 'state': state, 'ae': AE , 'command': []});
+			queueConnect.push({ 'id': id, 'state': state, 'ae': AE, 'command': [] });
 			if (isChangeConnect) {
 				return;
 			}
@@ -347,7 +347,7 @@ class Vds2465Server extends utils.Adapter {
 	* Setzt die States für Abfrage und Fehler nach einem Befehl
 	* @param {String} channel ChannelID oder Identnummer
 	* @param {String} meldung Fehlermeldung
-    * @param {Number} satz Datensatz (0x03, 0x11 oder 0x20)
+	* @param {Number} satz Datensatz (0x03, 0x11 oder 0x20)
 	*/
 	async checkCommand(channel, meldung, satz) {
 		let identnr;
@@ -357,7 +357,7 @@ class Vds2465Server extends utils.Adapter {
 		} else {
 			identnr = channel;
 			isChannelIdentnr = true;
-        }
+		}
 		for (let i = 0; i < devicesConnected.length; i++) {
 			if (devicesConnected[i].id === identnr) {
 				for (let x = 0; x < devicesConnected[i].command.length; x++) {
@@ -365,18 +365,18 @@ class Vds2465Server extends utils.Adapter {
 						await this.setStateAsync(devicesConnected[i].command[x].channelid + '.abfrage', false, true);
 						await this.setStateAsync(devicesConnected[i].command[x].channelid + '.fehler', meldung, true);
 						await this.setStateAsync(devicesConnected[i].command[x].channelid + '.zeit_empfang', '', true);
-                    }
+					}
 					devicesConnected[i].command.splice(x, 1);
 					return;
-                }
+				}
 			}
 		}
-    }
+	}
 
 	/**
 	* Sendet den Befehl
 	* @param {String} channelid Channel-Id
-    * @param {String} command Vollständiger Satz (0x02 oder 0x10)
+	* @param {String} command Vollständiger Satz (0x02 oder 0x10)
 	*/
 	async sendCommand(channelid, command) {
 		let identnr = (channelid.split('.'))[2];
@@ -386,12 +386,12 @@ class Vds2465Server extends utils.Adapter {
 				devicesConnected[i].command.push({ 'channelid': channelid, 'satz': command });
 				devicesConnected[i].ae.sendCommand(command);
 				return;
-            }
+			}
 		}
 		await this.setStateAsync(channelid + '.abfrage', false, true);
 		await this.setStateAsync(channelid + '.fehler', 'keine Verbindung', true);
 		await this.setStateAsync(channelid + '.zeit_empfang', '', true);
-    }
+	}
 
 	/**
 	* Legt die Grundstruktur an, wenn nicht vorhanden (Device)
@@ -407,8 +407,8 @@ class Vds2465Server extends utils.Adapter {
 					if ((this.namespace + '.' + id) === dev[i]._id) {
 						isCreateStructur = false;
 						return;
-                    }
-                }
+					}
+				}
 			}
 			await this.createDeviceAsync(id, { "name": id });
 			await this.createChannelAsync(id, 'Info', { "name": "Information" });
@@ -448,18 +448,18 @@ class Vds2465Server extends utils.Adapter {
 			this.log.error(e);
 		} finally{
 			isCreateStructur = false;
-        }
+		}
 	}
 
 	/**
 	* Legt die Linien an, wenn nicht vorhanden (Channel und State)
 	* @param {String} id Identnummer
-    * @param {Number} li Adresse
-    * @param {Number} ge Geraet
-    * @param {Number} be Bereich
-    * @param {Number} az Adresszusatz
-    * @param {String} art Adresserweiterung
-    * @return {Promise<String>} ID vom State 
+	* @param {Number} li Adresse
+	* @param {Number} ge Geraet
+	* @param {Number} be Bereich
+	* @param {Number} az Adresszusatz
+	* @param {String} art Adresserweiterung
+	* @return {Promise<String>} ID vom State 
 	*/
 	async linieAnlegen(id, li, ge, be, az, art) {
 		let channel_id = `${id}.${art}_${li}-${ge}-${be}-${az}`;
@@ -702,8 +702,8 @@ class Vds2465Server extends utils.Adapter {
 		}
 		finally {
 			return channel_id;
-        }
-    }
+		}
+	}
 
 	Sleep(milliseconds) {
 		return new Promise(resolve => setTimeout(resolve, milliseconds));
@@ -711,7 +711,7 @@ class Vds2465Server extends utils.Adapter {
 
 	/**
 	* Empfangene Daten
-    * @param {String} id Identnummer
+	* @param {String} id Identnummer
 	* @param {Object} obj Daten als JSON
 	*/
 	async zerlegeDaten(id, obj) {
@@ -719,8 +719,10 @@ class Vds2465Server extends utils.Adapter {
 		try {
 			let date = new Date();
 			let zeit = date.toLocaleString('de-DE');
-			while (isCreateStructur) {
+			let count = 0;
+			while (isCreateStructur && count < 100) {	//notwendig bei Erstkontakt
 				await this.Sleep(100);
+				count++;
 			}
 			let Meldungszeit = '';
 			if (obj.hasOwnProperty('Satz_50')) {
@@ -740,7 +742,7 @@ class Vds2465Server extends utils.Adapter {
 				let name = vdsmeldungen[obj[satz].Meldungsart];
 				if (typeof name === 'undefined') {
 					name = '';
-                }
+				}
 				if (obj[satz].Adresserweiterung === 'Eingang') {
 					await this.setStateAsync(channel + '.abfrage', false, true);
 					await this.setStateAsync(channel + '.fehler', '', true);
@@ -764,7 +766,7 @@ class Vds2465Server extends utils.Adapter {
 					await this.setStateAsync(channel + '.zeit_empfang', zeit, true);
 					await this.setStateAsync(channel + '.abfrage', false, true);
 					await this.setStateAsync(channel + '.fehler', '', true);
-                }
+				}
 			}
 			if (obj.hasOwnProperty('Satz_3')) {
 				await this.checkCommand(channel, '', 0x03);
@@ -787,7 +789,7 @@ class Vds2465Server extends utils.Adapter {
 		} catch (e) {
 			this.log.error('zerlegeDaten: ' + e);
 		}
-    }
+	}
 }
 
 if (require.main !== module) {
