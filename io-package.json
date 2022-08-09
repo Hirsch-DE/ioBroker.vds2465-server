@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "vds2465-server",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "news": {
+      "0.0.3": {
+        "en": "Fix priority\nFix VdS-Request",
+        "de": "Fix Priorität\nFix VdS-Request",
+        "ru": "Fix приоритет\nИсправление VdS-Request",
+        "pt": "Fixar prioridade\nCorrigir VdS-Request",
+        "nl": "Fix prioriteit\nVdS-verzoek repareren",
+        "fr": "Priorité fixe\nCorrection de la demande VdS",
+        "it": "Fissare la priorità\nFissare VdS-Richiesta",
+        "es": "Prioridad fija\nArreglar VdS-Request",
+        "pl": "Fix priorytetowy\nNapraw żądanie VdS",
+        "zh-cn": "B. 优先重点\n请求"
+      },
       "0.0.2": {
         "en": "Added other languages in settings dialog\nvarious small adjustments",
         "de": "Weitere Sprachen im Einstelldialog hinzugefügt\ndiverse kleine Anpassungen",
