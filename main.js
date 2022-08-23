@@ -48,14 +48,14 @@ class Vds2465Server extends utils.Adapter {
 		this.setState('info.connection', false, true);
 
 		// The adapters config (in the instance object everything under the attribute "native") is accessible via
-		// this.config:
 		let channel;
 		try {
 			for (let i = 0; i < this.config.relais.length; i++) {
 				// @ts-ignore
-				await this.grundstrukturAnlegen(this.config.relais[i].identnr);
+				const id = this.config.relais[i].identnr.toString();
+				await this.grundstrukturAnlegen(id);
 				// @ts-ignore
-				channel = await this.linieAnlegen(this.config.relais[i].identnr, this.config.relais[i].adr, this.config.relais[i].ge, this.config.relais[i].be, 0, 'Ausgang');
+				channel = await this.linieAnlegen(id, this.config.relais[i].adr, this.config.relais[i].ge, this.config.relais[i].be, 0, 'Ausgang');
 				this.log.info('Relais: ' + channel + ' durch Konfiguration angelegt');
 			}
 		}
@@ -64,10 +64,6 @@ class Vds2465Server extends utils.Adapter {
 		}
 	
 		/*
-		For every state in the system there has to be also an object of type state
-		Here a simple template for a boolean variable named "testVariable"
-		Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
-		*//*
 		await this.setObjectNotExistsAsync('testVariable', {
 			type: 'state',
 			common: {
@@ -79,37 +75,10 @@ class Vds2465Server extends utils.Adapter {
 			},
 			native: {},
 		});
-
-		// In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
-		this.subscribeStates('testVariable');
-		// You can also add a subscription for multiple states. The following line watches all states starting with "lights."
-		// this.subscribeStates('lights.*');
-		// Or, if you really must, you can also watch all states. Don't do this if you don't need to. Otherwise this will cause a lot of unnecessary load on the system:
 		*/
 		this.subscribeStates('*.abfrage');
 		this.subscribeStates('*.ausgangszustand');
 
-		/*
-			setState examples
-			you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
-		*//*
-		// the variable testVariable is set to true as command (ack=false)
-		await this.setStateAsync('testVariable', 'true');
-
-		// same thing, but the value is flagged "ack"
-		// ack should be always set to true if the value is received from or acknowledged from the target system
-		await this.setStateAsync('testVariable', { val: 'true', ack: true });
-
-		// same thing, but the state is deleted after 30s (getState will return null afterwards)
-		await this.setStateAsync('testVariable', { val: 'true', ack: true, expire: 30 });
-
-		// examples for the checkPassword/checkGroup functions
-		let result = await this.checkPasswordAsync('admin', 'iobroker');
-		this.log.info('check user admin pw iobroker: ' + result);
-
-		result = await this.checkGroupAsync('admin', 'administrator');
-		this.log.info('check group user admin group administrator: ' + result);
-		*/
 		this.serverStart();
 	}
 
@@ -205,20 +174,19 @@ class Vds2465Server extends utils.Adapter {
 		}
 	}
 
-	//If you need to accept messages in your adapter, uncomment the following block and the corresponding line in the constructor.
 	/**
 	* Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
 	* Using this method requires "common.messagebox" property to be set to true in io-package.json
 	* @param {ioBroker.Message} obj
 	*/
 	onMessage(obj) {
-		if (typeof obj === 'object' && obj.message) {
-	 		if (obj.command === 'send') {
-	 			// e.g. send email or pushover or whatever
-	 			this.log.debug('send command');
-
-	 			// Send response in callback if required
-	 			//if (obj.callback) this.sendTo(obj.from, obj.command, 'Message received', obj.callback);
+		//this.log.debug(JSON.stringify(obj));
+		if (typeof obj === 'object') {
+			if (obj.command === 'newKey') {
+				if (obj.callback) {
+					const key = vds.getRandomKey();
+					this.sendTo(obj.from, obj.command, [{ "label": key, "value": key }], obj.callback);
+				}
 	 		}
 	 	}
 	}
@@ -244,6 +212,7 @@ class Vds2465Server extends utils.Adapter {
 	*/
 	onClientConnected(sock) {
 		let remoteAddress = sock.remoteAddress + ':' + sock.remotePort;
+		this.log.debug('Verbindung von ' + remoteAddress);
 		const AE = new vds();
 
 		AE.on('log', (msg, level) => {
@@ -264,7 +233,7 @@ class Vds2465Server extends utils.Adapter {
 		})
 
 		AE.on('disconnect', (id) => {
-			this.log.debug('disconnect ID: ' + id.toString());
+			this.log.debug('disconnect ID: ' + id);
 			this.setConnectState(id, false, AE);
 		})
 
@@ -285,7 +254,7 @@ class Vds2465Server extends utils.Adapter {
 				}
 				catch (e) {
 					this.log.error('Setzen Geraetedaten nicht möglich');
-                }
+				}
 			});
 		}
 
@@ -296,7 +265,7 @@ class Vds2465Server extends utils.Adapter {
 			AE.received(data);
 		});
 		sock.on('close', () => {
-			this.log.info('connection from ' + remoteAddress + ' closed');
+			this.log.debug('connection from ' + remoteAddress + ' closed');
 			AE.disconnect();
 		});
 		sock.on('error', (err) => {
@@ -328,7 +297,6 @@ class Vds2465Server extends utils.Adapter {
 					for (i = 0; i < devicesConnected.length; i++) {
 						if (devicesConnected[i].id === obj.id) {
 							devicesConnected.splice(i, 1);
-							break;
 						}
 					}
 				}
@@ -336,7 +304,7 @@ class Vds2465Server extends utils.Adapter {
 			}
 		}
 		catch (e) {
-			this.log.error('setConnectState: ' + e)
+			this.log.error('setConnectState: ' + e);
 		}
 		finally {
 			isChangeConnect = false;
@@ -381,6 +349,7 @@ class Vds2465Server extends utils.Adapter {
 	async sendCommand(channelid, command) {
 		let identnr = (channelid.split('.'))[2];
 		this.log.debug(`Befehl: ${command} fuer id: ${identnr}`);
+		this.log.debug(devicesConnected.length.toString());
 		for (let i = 0; i < devicesConnected.length; i++) {
 			if (devicesConnected[i].id === identnr) {
 				devicesConnected[i].command.push({ 'channelid': channelid, 'satz': command });
@@ -445,7 +414,7 @@ class Vds2465Server extends utils.Adapter {
 				"def": ''
 			});
 		} catch (e) {
-			this.log.error(e);
+			this.log.error('grundstrukturAnlegen: ' + e);
 		} finally{
 			isCreateStructur = false;
 		}

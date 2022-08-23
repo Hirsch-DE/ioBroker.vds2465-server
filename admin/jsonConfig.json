@@ -1,5 +1,6 @@
 {
   "type": "tabs",
+  "i18n":  false,
   "items": {
     "mainTab": {
       "type": "panel",
@@ -197,11 +198,12 @@
               },
               "filter": false,
               "sort": false,
-              "default": 1
+              "defaultFunc": "globalData.devices.length + 1"
             },
             {
-              "type": "text",
+              "type": "autocompleteSendTo",
               "width": "50%",
+              "command": "newKey",
               "title": {
                 "en": "Key",
                 "de": "Schlüssel",
@@ -228,9 +230,14 @@
               },
               "attr": "key",
               "hidden": "data.keynr === 0",
+              "freeSolo": true,
+              "noTranslation": "true",
               "filter": false,
               "sort": false,
-              "default": "11223344556677889900aabbccddeeff"
+              "validator": "RegExp(\"[0-9a-f]{32}\").test(data.key.toLowerCase()) || data.keynr === 0",
+              "validatorNoSaveOnError": true,
+              "maxLength": 32,
+              "default": "Bei Klick Zufallsschluessel auswaehlen"
             }
           ]
         }
