@@ -227,14 +227,14 @@ class Vds2465Server extends utils.Adapter {
 			}
 		});
 
-		AE.on('connect', (id) => {
-			this.log.debug('connect ID: ' + id);
-			this.setConnectState(id, true, AE);
+		AE.on('connect', (obj) => {
+			this.log.debug('connect ID: ' + obj.id);
+			this.setConnectState(obj, true, AE);
 		})
 
-		AE.on('disconnect', (id) => {
-			this.log.debug('disconnect ID: ' + id);
-			this.setConnectState(id, false, AE);
+		AE.on('disconnect', (obj) => {
+			this.log.debug('disconnect ID: ' + obj.id);
+			this.setConnectState(obj, false, AE);
 		})
 
 		AE.on('data', (obj) => {
@@ -275,32 +275,52 @@ class Vds2465Server extends utils.Adapter {
 
 	/**
 	* Setzt den Verbindungszustand und speichert die Verweise
-	* @param {String} id Identnummer
+	* @param {Object} id_obj {'id':Identnummer, 'address': IP:Port}
 	* @param {Boolean} state Zustand
 	* @param {vds | null} AE Verwalter
 	*/
-	async setConnectState(id, state, AE) {
+	async setConnectState(id_obj, state, AE) {
 		try {
-			queueConnect.push({ 'id': id, 'state': state, 'ae': AE, 'command': [] });
+			queueConnect.push({ 'id': id_obj.id, 'state': state, 'ae': AE, 'command': [], 'address': id_obj.address });
 			if (isChangeConnect) {
 				return;
 			}
 			isChangeConnect = true;
 			let obj;
+			let i;
+			let isVerbunden;
 			while (queueConnect.length > 0) {
+				isVerbunden = false;
 				obj = queueConnect.shift();
-				if (obj.state) {
-					await this.grundstrukturAnlegen(obj.id);
-					devicesConnected.push(obj);
-				} else {
-					let i;
+				if (obj.state) {	//Aufbau
 					for (i = 0; i < devicesConnected.length; i++) {
 						if (devicesConnected[i].id === obj.id) {
-							devicesConnected.splice(i, 1);
+							isVerbunden = true;
 						}
 					}
+					if (isVerbunden) {
+						this.log.warn(`Identnummer ${obj.id} schon verbunden!`);
+					} else {
+						await this.grundstrukturAnlegen(obj.id);
+					}
+					devicesConnected.push(obj);
+					await this.setStateAsync(`${obj.id}.Info.zustand`, obj.state, true);
+				} else {	//Abbau
+					for (i = 0; i < devicesConnected.length; i++) {
+						if (devicesConnected[i].id === obj.id) {
+							if (devicesConnected[i].address === id_obj.address) {	//selbe ID und Verbindung
+								devicesConnected.splice(i, 1);
+								i--;
+							} else {
+								isVerbunden = true;			//selbe ID, aber andere Verbindung
+							}
+						}
+					}
+					if (!isVerbunden) {
+						await this.setStateAsync(`${obj.id}.Info.zustand`, obj.state, true);
+					}
 				}
-				await this.setStateAsync(`${obj.id}.Info.zustand`, obj.state, true);
+				
 			}
 		}
 		catch (e) {
@@ -349,7 +369,6 @@ class Vds2465Server extends utils.Adapter {
 	async sendCommand(channelid, command) {
 		let identnr = (channelid.split('.'))[2];
 		this.log.debug(`Befehl: ${command} fuer id: ${identnr}`);
-		this.log.debug(devicesConnected.length.toString());
 		for (let i = 0; i < devicesConnected.length; i++) {
 			if (devicesConnected[i].id === identnr) {
 				devicesConnected[i].command.push({ 'channelid': channelid, 'satz': command });
@@ -369,15 +388,10 @@ class Vds2465Server extends utils.Adapter {
 	async grundstrukturAnlegen(id) {
 		try {
 			isCreateStructur = true;
-			let dev = await this.getDevicesAsync();
-			if (dev.length > 0) {
-				//this.log.debug(JSON.stringify(dev));
-				for (let i = 0; i < dev.length; i++) {
-					if ((this.namespace + '.' + id) === dev[i]._id) {
-						isCreateStructur = false;
-						return;
-					}
-				}
+			let objectCheck = await this.getStateAsync(`${id}.Info.merkmale`);
+			if (objectCheck) {
+				isCreateStructur = false;
+				return;
 			}
 			await this.createDeviceAsync(id, { "name": id });
 			await this.createChannelAsync(id, 'Info', { "name": "Information" });
@@ -688,11 +702,9 @@ class Vds2465Server extends utils.Adapter {
 		try {
 			let date = new Date();
 			let zeit = date.toLocaleString('de-DE');
-			let count = 0;
-			while (isCreateStructur && count < 100) {	//notwendig bei Erstkontakt
-				await this.Sleep(100);
-				count++;
-			}
+
+			await this.grundstrukturAnlegen(id);
+
 			let Meldungszeit = '';
 			if (obj.hasOwnProperty('Satz_50')) {
 				let zeit = new Date(obj['Satz_50'].Value);
