@@ -44,6 +44,11 @@ Von diesem Adapter wird auch das "Service Request" unterstützt, welches in eini
 
 ## Changelog
 
+### 0.1.0
+* (Hirsch-DE) Fix VdSServiceRequest
+* (Hirsch-DE) Zaehler Service Request festgelegt
+* (Hirsch-DE) Haendeln von mehreren Verbindungen von einer ID
+* (Hirsch-DE) Blockierende Schleife entfernt
 ### 0.0.3
 * (Hirsch-DE) Fix Priorität
 * (Hirsch-DE) Fix VdS-Request

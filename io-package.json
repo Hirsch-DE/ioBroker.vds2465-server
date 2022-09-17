@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "vds2465-server",
-    "version": "0.0.3",
+    "version": "0.1.0",
     "news": {
+      "0.1.0": {
+        "en": "Fix VdSServiceRequest\nService request counter fixed\nHandling multiple connections from one ID\nRemoved blocking loop",
+        "de": "Fix VdSServiceRequest\nZaehler Service Request festgelegt\nHaendeln von mehreren Verbindungen von einer ID\nBlockierende Schleife entfernt",
+        "ru": "Fix VdSServiceRequest\nService запрос счетчик фиксированный\nОбработка нескольких подключений из одного ID\nRemoved блокировка loop",
+        "pt": "Corrigir VdSServiceRequest\nService request conta fixo\nManipulando várias conexões de um loop de bloqueio ID\nRemoved",
+        "nl": "Fix VdSServiceRequest\nServiceverzoekteller opgelost\nBehandelen van meerdere verbindingen vanaf één ID\nBlokkeerlus verwijderd",
+        "fr": "Correction de VdSServiceRequest\nCompteur de requêtes de service corrigé\nGestion de plusieurs connexions à partir d'un ID\nSuppression de la boucle de blocage",
+        "it": "Riparare VdSServiceRichiesta\nRichiesta di servizio fisso\nGestione di più connessioni da un ID\nRemoved blocco loop",
+        "es": "Fijar VdSServiceRequest\nService request counter fixed\nManejo de múltiples conexiones de un bucle de bloqueo de ID\nRemovido",
+        "pl": "Fix VdSServiceRequest\nService (ang.). Powiązując wiele połączeń z jednym ID\nRemoved blokuje pętlę blokującą pętlę",
+        "zh-cn": "Fix VdSService de Retrn Servic要求反垄断 D. 处理一名国际发展研究所的多种联系"
+      },
       "0.0.3": {
         "en": "Fix priority\nFix VdS-Request",
         "de": "Fix Priorität\nFix VdS-Request",
