@@ -13,6 +13,11 @@ on:
       - "v[0-9]+.[0-9]+.[0-9]+-**"
   pull_request: {}
 
+# Cancel previous PR/branch runs when a new commit is pushed
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   # Performs quick checks before the expensive test runs
   check-and-lint:
@@ -35,7 +40,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [14.x, 16.x, 18.x]
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
@@ -62,6 +67,10 @@ jobs:
       startsWith(github.ref, 'refs/tags/v')
 
     runs-on: ubuntu-latest
+    
+    # Write permissions are required to create Github releases
+    permissions:
+      contents: write
 
     steps:
       - uses: ioBroker/testing-action-deploy@v1
