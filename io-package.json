@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vds2465-server",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "news": {
+      "0.1.1": {
+        "en": "Fix TC-Counter",
+        "de": "Fix TC-Counter",
+        "ru": "Исправить TC-счетчик",
+        "pt": "Consertar TC-Counter",
+        "nl": "TC-teller repareren",
+        "fr": "Correction du compteur TC",
+        "it": "Risolto il problema del contatore TC",
+        "es": "Arreglar contador TC",
+        "pl": "Napraw licznik TC",
+        "uk": "Виправити TC-Counter",
+        "zh-cn": "修复 TC 计数器"
+      },
       "0.1.0": {
         "en": "Fix VdSServiceRequest\nService request counter fixed\nHandling multiple connections from one ID\nRemoved blocking loop",
         "de": "Fix VdSServiceRequest\nZaehler Service Request festgelegt\nHaendeln von mehreren Verbindungen von einer ID\nBlockierende Schleife entfernt",
