@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vds2465-server",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "news": {
+      "0.1.3": {
+        "en": "Fix RC-Counter",
+        "de": "Fix RC-Counter",
+        "ru": "Исправить RC-счетчик",
+        "pt": "Consertar RC-Counter",
+        "nl": "RC-teller repareren",
+        "fr": "Correction du compteur RC",
+        "it": "Risolto il problema del contatore RC",
+        "es": "Arreglar contador RC",
+        "pl": "Napraw licznik RC",
+        "uk": "Виправити RC-Counter",
+        "zh-cn": "修复 RC 计数器"
+      },
       "0.1.2": {
         "en": "Fix TC-Counter\nFix RC-Counter\nvarious small adjustments",
         "de": "Fix TC-Counter\nFix RC-Counter\ndiverse kleine Anpassungen",
