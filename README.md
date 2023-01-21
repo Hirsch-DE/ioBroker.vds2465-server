@@ -15,7 +15,7 @@
 
 Empfänger von VdS2465-Meldungen
 
-Der Adapter empfängt Meldungen von Wählgeräten mit dem VdS2465-2 Protokoll.
+Der Adapter empfängt Meldungen von Wählgeräten mit dem VdS2465-S2 Protokoll.
 Dabei sind folgende Varianten möglich
 1. bedarfsgesteuert unverschlüsselt
 1. stehend unverschlüsselt
