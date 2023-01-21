@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vds2465-server",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "news": {
+      "0.1.4": {
+        "en": "TC counter checked at IK7\nText encoding changed to ISO 8859-1",
+        "de": "TC-Counter bei IK7 geprüft\nEncoding bei Text auf ISO 8859-1 geändert",
+        "ru": "Счетчик ТС проверен на ИК7\nКодировка текста изменена на ISO 8859-1.",
+        "pt": "Contador TC verificado em IK7\nCodificação de texto alterada para ISO 8859-1",
+        "nl": "TC-teller gecontroleerd op IK7\nTekstcodering gewijzigd in ISO 8859-1",
+        "fr": "Compteur TC vérifié à IK7\nCodage du texte changé en ISO 8859-1",
+        "it": "Contatore TC controllato a IK7\nCodifica del testo modificata in ISO 8859-1",
+        "es": "Contador TC comprobado en IK7\nLa codificación de texto cambió a ISO 8859-1",
+        "pl": "Licznik TC sprawdzony na IK7\nKodowanie tekstu zmieniono na ISO 8859-1",
+        "uk": "Лічильник TC перевірено на IK7\nКодування тексту змінено на ISO 8859-1",
+        "zh-cn": "在 IK7 檢查 TC 計數器\n文本編碼更改為 ISO 8859-1"
+      },
       "0.1.3": {
         "en": "Fix RC-Counter",
         "de": "Fix RC-Counter",
