@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vds2465-server",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "news": {
+      "0.1.5": {
+        "en": "Fix Check duplicate connections",
+        "de": "Fix Check doppelte Verbindungen",
+        "ru": "Fix Проверить дубликаты соединений",
+        "pt": "Consertar Verificar conexões duplicadas",
+        "nl": "Fix Controleer dubbele verbindingen",
+        "fr": "Réparer Vérifier les connexions en double",
+        "it": "Fix Controlla connessioni duplicate",
+        "es": "Arreglar Verificar conexiones duplicadas",
+        "pl": "Napraw Sprawdź zduplikowane połączenia",
+        "uk": "Виправлення. Перевірте повторювані підключення",
+        "zh-cn": "修復檢查重複連接"
+      },
       "0.1.4": {
         "en": "TC counter checked at IK7\nText encoding changed to ISO 8859-1",
         "de": "TC-Counter bei IK7 geprüft\nEncoding bei Text auf ISO 8859-1 geändert",

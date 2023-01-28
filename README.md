@@ -44,6 +44,8 @@ Von diesem Adapter wird auch das "Service Request" unterstützt, welches in eini
 
 ## Changelog
 
+### 0.1.5
+* (Hirsch-DE) Fix Check doppelte Verbindungen
 ### 0.1.4
 * (Hirsch-DE) TC-Counter bei IK7 geprüft
 * (Hirsch-DE) Encoding bei Text auf ISO 8859-1 geändert

@@ -308,7 +308,7 @@ class Vds2465Server extends utils.Adapter {
 				} else {	//Abbau
 					for (i = 0; i < devicesConnected.length; i++) {
 						if (devicesConnected[i].id === obj.id) {
-							if (devicesConnected[i].address === id_obj.address) {	//selbe ID und Verbindung
+							if (devicesConnected[i].address === obj.address) {	//selbe ID und Verbindung
 								devicesConnected.splice(i, 1);
 								i--;
 							} else {
