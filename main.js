@@ -293,6 +293,11 @@ class Vds2465Server extends utils.Adapter {
 				isVerbunden = false;
 				obj = queueConnect.shift();
 				if (obj.state) {	//Aufbau
+					this.log.debug('Aufbau: ' + JSON.stringify(obj));
+					if (devicesConnected.length > 0) {
+						this.log.debug('Gespeichert:');
+						devicesConnected.forEach((value) => { this.log.debug(JSON.stringify(value)) });
+					}
 					for (i = 0; i < devicesConnected.length; i++) {
 						if (devicesConnected[i].id === obj.id) {
 							isVerbunden = true;
@@ -306,6 +311,11 @@ class Vds2465Server extends utils.Adapter {
 					devicesConnected.push(obj);
 					await this.setStateAsync(`${obj.id}.Info.zustand`, obj.state, true);
 				} else {	//Abbau
+					this.log.debug('Abbau: ' + JSON.stringify(obj));
+					if (devicesConnected.length > 0) {
+						this.log.debug('Gespeichert:');
+						devicesConnected.forEach((value) => { this.log.debug(JSON.stringify(value)) });
+					}
 					for (i = 0; i < devicesConnected.length; i++) {
 						if (devicesConnected[i].id === obj.id) {
 							if (devicesConnected[i].address === obj.address) {	//selbe ID und Verbindung
