@@ -315,6 +315,10 @@ class Vds2465Server extends utils.Adapter {
 					if (devicesConnected.length > 0) {
 						this.log.debug('Gespeichert:');
 						devicesConnected.forEach((value) => { this.log.debug(JSON.stringify(value)) });
+					} else {
+						this.log.debug('Abbau ohne Aufbau??? Wert: ' + devicesConnected.length.toString());
+						await this.Sleep(200);
+						this.log.debug('Jetzt: ' + devicesConnected.length.toString());
 					}
 					for (i = 0; i < devicesConnected.length; i++) {
 						if (devicesConnected[i].id === obj.id) {
