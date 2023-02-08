@@ -293,32 +293,31 @@ class Vds2465Server extends utils.Adapter {
 				isVerbunden = false;
 				obj = queueConnect.shift();
 				if (obj.state) {	//Aufbau
+					/*
 					this.log.debug('Aufbau: ' + JSON.stringify(obj));
 					if (devicesConnected.length > 0) {
 						this.log.debug('Gespeichert:');
 						devicesConnected.forEach((value) => { this.log.debug(JSON.stringify(value)) });
 					}
+					*/
 					for (i = 0; i < devicesConnected.length; i++) {
 						if (devicesConnected[i].id === obj.id) {
 							isVerbunden = true;
 						}
 					}
+					devicesConnected.push(obj);
 					if (isVerbunden) {
 						this.log.warn(`Identnummer ${obj.id} schon verbunden!`);
 					} else {
 						await this.grundstrukturAnlegen(obj.id);
 					}
-					devicesConnected.push(obj);
 					await this.setStateAsync(`${obj.id}.Info.zustand`, obj.state, true);
 				} else {	//Abbau
-					this.log.debug('Abbau: ' + JSON.stringify(obj));
-					if (devicesConnected.length > 0) {
-						this.log.debug('Gespeichert:');
-						devicesConnected.forEach((value) => { this.log.debug(JSON.stringify(value)) });
-					} else {
-						this.log.debug('Abbau ohne Aufbau??? Wert: ' + devicesConnected.length.toString());
-						await this.Sleep(200);
-						this.log.debug('Jetzt: ' + devicesConnected.length.toString());
+					//this.log.debug('Abbau: ' + JSON.stringify(obj));
+					if (devicesConnected.length === 0) {
+						//this.log.debug('Abbau ohne Aufbau??? Wert: ' + devicesConnected.length.toString());
+						await this.Sleep(1000);
+						this.log.debug('Jetzt nach Warten: ' + devicesConnected.length.toString());
 					}
 					for (i = 0; i < devicesConnected.length; i++) {
 						if (devicesConnected[i].id === obj.id) {
