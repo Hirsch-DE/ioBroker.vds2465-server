@@ -293,13 +293,6 @@ class Vds2465Server extends utils.Adapter {
 				isVerbunden = false;
 				obj = queueConnect.shift();
 				if (obj.state) {	//Aufbau
-					/*
-					this.log.debug('Aufbau: ' + JSON.stringify(obj));
-					if (devicesConnected.length > 0) {
-						this.log.debug('Gespeichert:');
-						devicesConnected.forEach((value) => { this.log.debug(JSON.stringify(value)) });
-					}
-					*/
 					for (i = 0; i < devicesConnected.length; i++) {
 						if (devicesConnected[i].id === obj.id) {
 							isVerbunden = true;
@@ -313,10 +306,12 @@ class Vds2465Server extends utils.Adapter {
 					}
 					await this.setStateAsync(`${obj.id}.Info.zustand`, obj.state, true);
 				} else {	//Abbau
-					//this.log.debug('Abbau: ' + JSON.stringify(obj));
 					if (devicesConnected.length === 0) {
-						//this.log.debug('Abbau ohne Aufbau??? Wert: ' + devicesConnected.length.toString());
-						await this.Sleep(1000);
+						this.log.debug('Abbau ohne Aufbau??? Warten!');
+						await this.Sleep(500);
+						if (devicesConnected.length === 0) {
+							await this.Sleep(500);
+						}
 						this.log.debug('Jetzt nach Warten: ' + devicesConnected.length.toString());
 					}
 					for (i = 0; i < devicesConnected.length; i++) {
