@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vds2465-server",
-    "version": "0.1.9",
+    "version": "0.1.10",
     "news": {
+      "0.1.10": {
+        "en": "Fix for ServiceRequest",
+        "de": "Fix für ServiceRequest",
+        "ru": "",
+        "pt": "",
+        "nl": "",
+        "fr": "",
+        "it": "",
+        "es": "",
+        "pl": "",
+        "uk": "",
+        "zh-cn": ""
+      },
       "0.1.9": {
         "en": "Fix for very fast connection establishment and connection termination messages",
         "de": "Fix für sehr schnelle Verbindungsaufbau und Verbindungsabbruch Nachrichten",
@@ -15,45 +28,6 @@
         "pl": "Informacje na temat szybkiego połączenia i połączenia",
         "uk": "Фіксація для дуже швидкого з'єднання та розірвання зв'язку повідомлень",
         "zh-cn": "迅速建立联系和联系终止信息"
-      },
-      "0.1.8": {
-        "en": "DEBUG",
-        "de": "DEBUG",
-        "ru": "",
-        "pt": "",
-        "nl": "",
-        "fr": "",
-        "it": "",
-        "es": "",
-        "pl": "",
-        "uk": "",
-        "zh-cn": ""
-      },
-      "0.1.7": {
-        "en": "DEBUG",
-        "de": "DEBUG",
-        "ru": "",
-        "pt": "",
-        "nl": "",
-        "fr": "",
-        "it": "",
-        "es": "",
-        "pl": "",
-        "uk": "",
-        "zh-cn": ""
-      },
-      "0.1.6": {
-        "en": "DEBUG",
-        "de": "DEBUG",
-        "ru": "",
-        "pt": "",
-        "nl": "",
-        "fr": "",
-        "it": "",
-        "es": "",
-        "pl": "",
-        "uk": "",
-        "zh-cn": ""
       },
       "0.1.5": {
         "en": "Fix Check duplicate connections",
