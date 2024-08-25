@@ -9,12 +9,13 @@
         "de": "Haupteinstellungen",
         "ru": "Основные настройки",
         "pt": "Configurações principais",
-        "nl": "Hoofdinstellingen",
+        "nl": "Belangrijkste instellingen",
         "fr": "Paramètres principaux",
         "it": "Impostazioni principali",
         "es": "Ajustes principales",
-        "pl": "Główne ustawienie",
-        "zh-cn": "主要环境"
+        "pl": "Ustawienia główne",
+        "uk": "Основні налаштування",
+        "zh-cn": "主要设置"
       },
       "items": {
         "bindIP": {
@@ -34,12 +35,13 @@
             "de": "Port",
             "ru": "порт",
             "pt": "porto",
-            "nl": "port",
+            "nl": "poort",
             "fr": "port",
             "it": "porto",
             "es": "puerto",
             "pl": "port",
-            "zh-cn": "港口"
+            "uk": "портрети",
+            "zh-cn": "端口"
           },
           "sm": 12,
           "md": 4,
@@ -52,14 +54,15 @@
           "label": {
             "en": "poll interval",
             "de": "Pollintervall",
-            "ru": "интервал опроса",
-            "pt": "intervalo de pesquisa",
-            "nl": "stemming",
-            "fr": "intervalle",
+            "ru": "интервал",
+            "pt": "intervalo de poluição",
+            "nl": "poll-interval",
+            "fr": "intervalle de sondage",
             "it": "intervallo di sondaggio",
             "es": "intervalo de encuesta",
-            "pl": "interwał",
-            "zh-cn": "投票间隔"
+            "pl": "przedział ankietowy",
+            "uk": "інтервал опитування",
+            "zh-cn": "民意调查间隔"
           },
           "help": {
             "en": "sec",
@@ -71,6 +74,7 @@
             "it": "secondo",
             "es": "sec",
             "pl": "sec",
+            "uk": "й",
             "zh-cn": "安全"
           },
           "sm": 12,
@@ -86,12 +90,13 @@
         "de": "Geräte",
         "ru": "Устройства",
         "pt": "Dispositivos",
-        "nl": "Vernietiging",
-        "fr": "Appareils",
-        "it": "Dispositivi",
+        "nl": "Apparaten",
+        "fr": "Dispositifs",
+        "it": "Apparecchi",
         "es": "Dispositivos",
-        "pl": "Device",
-        "zh-cn": "证人"
+        "pl": "Urządzenia",
+        "uk": "Пристрої",
+        "zh-cn": "设备"
       },
       "items": {
         "_explanation": {
@@ -99,14 +104,15 @@
           "text": {
             "en": "Parameters for the individual dialing devices",
             "de": "Parameter für die einzelnen Wähleinrichtungen",
-            "ru": "Параметры для индивидуальных устройств для набора",
+            "ru": "Параметры для отдельных устройств набора",
             "pt": "Parâmetros para dispositivos de marcação individuais",
-            "nl": "Parameters voor de individuele apparatuur",
-            "fr": "Paramètres pour les appareils de composition individuels",
+            "nl": "Parameters voor de individuele wijzerapparatuur",
+            "fr": "Paramètres pour les appareils individuels de composition",
             "it": "Parametri per i singoli dispositivi di comporre",
             "es": "Parámetros para los dispositivos de marcado individuales",
-            "pl": "Parametry dla poszczególnych urządzeń dialingowych",
-            "zh-cn": "个人厕所的参数"
+            "pl": "Parametry dla poszczególnych urządzeń wybierających",
+            "uk": "Параметри для індивідуальних пристроїв диалінгу",
+            "zh-cn": "个别拨号装置的参数"
           }
         },
         "devices": {
@@ -122,23 +128,25 @@
                 "ru": "идентификационный номер",
                 "pt": "número de identificação",
                 "nl": "identificatienummer",
-                "fr": "numéro d ' identification",
+                "fr": "numéro d'identification",
                 "it": "numero di identificazione",
                 "es": "número de identificación",
-                "pl": "identyfikacja",
-                "zh-cn": "身份识别号码"
+                "pl": "numer identyfikacyjny",
+                "uk": "ідентифікаційний номер",
+                "zh-cn": "识别号码"
               },
               "help": {
                 "en": "Numbers without leading 0 (max 12 digits)",
                 "de": "Zahlen ohne führende 0 (max. 12 Ziffern)",
-                "ru": "Номера без ведущих 0 (максимум 12 цифр)",
+                "ru": "Числа без 0 (макс. 12 цифр)",
                 "pt": "Números sem chumbo 0 (máx. 12 dígitos)",
-                "nl": "Nummers zonder te leiden 0 (max 12 cijfers)",
-                "fr": "Nombres sans tête 0 (max 12 chiffres)",
+                "nl": "Aantallen zonder leidend 0 (max 12 cijfers)",
+                "fr": "Nombres sans tête 0 (max. 12 chiffres)",
                 "it": "Numeri senza piombo 0 (max 12 cifre)",
                 "es": "Números sin plomo 0 (máximo 12 dígitos)",
-                "pl": "Liczby bez wskazania 0 (max 12)",
-                "zh-cn": "未领0.(12个数字)的数字"
+                "pl": "Liczba bez 0 (max 12 cyfr)",
+                "uk": "Кількість без провідних 0 (макс 12 цифр)",
+                "zh-cn": "未领先 0 的数字( 最多 12 位数)"
               },
               "min": 1,
               "max": 999999999999,
@@ -154,12 +162,13 @@
                 "de": "stehend",
                 "ru": "стоя",
                 "pt": "de pé",
-                "nl": "staan",
+                "nl": "staand",
                 "fr": "debout",
                 "it": "in piedi",
                 "es": "de pie",
-                "pl": "stać",
-                "zh-cn": "常设职位"
+                "pl": "stojące",
+                "uk": "стоячи",
+                "zh-cn": "状态"
               },
               "attr": "stehend",
               "filter": false,
@@ -174,12 +183,13 @@
                 "de": "Schlüsselnummer",
                 "ru": "KeyNr",
                 "pt": "Chaveiro",
-                "nl": "Keyn",
-                "fr": "KeyNr",
+                "nl": "SleutelNr",
+                "fr": "CléNr",
                 "it": "Chiave",
                 "es": "KeyNr",
                 "pl": "KeyNr",
-                "zh-cn": "主要国家"
+                "uk": "Головна",
+                "zh-cn": "键Nr"
               },
               "min": 0,
               "max": 65534,
@@ -187,14 +197,15 @@
               "help": {
                 "en": "0 = unencrypted",
                 "de": "0 = unverschlüsselt",
-                "ru": "0 = незашифровано",
+                "ru": "0 = незашифрованные",
                 "pt": "0 = não criptografado",
-                "nl": "0 = onbewerkt",
-                "fr": "0 = non chiffré",
+                "nl": "0 = ongecodeerd",
+                "fr": "0 = non chiffrés",
                 "it": "0 = non criptato",
                 "es": "0 = no cifrado",
-                "pl": "0 = unencrypted",
-                "zh-cn": "0 = 未加权"
+                "pl": "0 = niezaszyfrowane",
+                "uk": "0 = нерозшифровані",
+                "zh-cn": "0 = 未加密"
               },
               "filter": false,
               "sort": false,
@@ -210,28 +221,30 @@
                 "ru": "Ключ",
                 "pt": "Chaveiro",
                 "nl": "Sleutel",
-                "fr": "Key",
+                "fr": "Clé",
                 "it": "Chiave",
                 "es": "Clave",
-                "pl": "Key",
-                "zh-cn": "关键"
+                "pl": "Klucz",
+                "uk": "Головна",
+                "zh-cn": "密钥"
               },
               "help": {
                 "en": "Allows 0-9a-f and a total of 32 characters",
                 "de": "Erlaubt 0-9a-f und insgesamt 32 Zeichen",
                 "ru": "Позволяет 0-9a-f и в общей сложности 32 символа",
                 "pt": "Permite 0-9a-f e um total de 32 caracteres",
-                "nl": "Staat 0-9a-f toe en in totaal 32 tekens",
+                "nl": "Hiermee 0-9a-f en in totaal 32 karakters",
                 "fr": "Permet 0-9a-f et un total de 32 caractères",
                 "it": "Consente 0-9a-f e un totale di 32 caratteri",
                 "es": "Permite 0-9a-f y un total de 32 caracteres",
-                "pl": "Allows 0-9a-f oraz 32 postaci",
-                "zh-cn": "允许0.-9a-f和总计32种特点"
+                "pl": "Pozwala na 0- 9a- f i łącznie 32 znaki",
+                "uk": "Дозволяє 0-9a-f і всього 32 символів",
+                "zh-cn": "允许 0- 9a- f 和总共 32 个字符"
               },
               "attr": "key",
               "hidden": "data.keynr === 0",
               "freeSolo": true,
-              "noTranslation": "true",
+              "noTranslation": true,
               "filter": false,
               "sort": false,
               "validator": "RegExp(\"[0-9a-f]{32}\").test(data.key.toLowerCase()) || data.keynr === 0",
@@ -248,14 +261,15 @@
       "label": {
         "en": "Relay",
         "de": "Relais",
-        "ru": "Реле",
+        "ru": "Relay",
         "pt": "Reposição",
-        "nl": "relais",
-        "fr": "Relay",
+        "nl": "Relais",
+        "fr": "Relais",
         "it": "Relè",
         "es": "Relay",
-        "pl": "Relay",
-        "zh-cn": "拖延"
+        "pl": "Przekaz",
+        "uk": "Реле",
+        "zh-cn": "中继"
       },
       "items": {
         "_explanation": {
@@ -265,12 +279,13 @@
             "de": "Parameter für die Erstellung von Relais",
             "ru": "Параметры для создания реле",
             "pt": "Parâmetros para criar relés",
-            "nl": "Parameters voor het maken van relais",
-            "fr": "Paramètres pour créer des relais",
+            "nl": "Parameters voor het aanmaken van relais",
+            "fr": "Paramètres pour la création de relais",
             "it": "Parametri per la creazione di relè",
             "es": "Parámetros para crear relés",
-            "pl": "Parametry do tworzenia przekaźników",
-            "zh-cn": "D. 造成重犯的参数"
+            "pl": "Parametry tworzenia przekaźników",
+            "uk": "Параметри для створення реле",
+            "zh-cn": "创建继电器的参数"
           }
         },
         "relais": {
@@ -286,23 +301,25 @@
                 "ru": "идентификационный номер",
                 "pt": "número de identificação",
                 "nl": "identificatienummer",
-                "fr": "numéro d ' identification",
+                "fr": "numéro d'identification",
                 "it": "numero di identificazione",
                 "es": "número de identificación",
-                "pl": "identyfikacja",
-                "zh-cn": "身份识别号码"
+                "pl": "numer identyfikacyjny",
+                "uk": "ідентифікаційний номер",
+                "zh-cn": "识别号码"
               },
               "help": {
                 "en": "Numbers without leading 0 (max 12 digits)",
                 "de": "Zahlen ohne führende 0 (max. 12 Ziffern)",
-                "ru": "Номера без ведущих 0 (максимум 12 цифр)",
+                "ru": "Числа без 0 (макс. 12 цифр)",
                 "pt": "Números sem chumbo 0 (máx. 12 dígitos)",
-                "nl": "Nummers zonder te leiden 0 (max 12 cijfers)",
-                "fr": "Nombres sans tête 0 (max 12 chiffres)",
+                "nl": "Aantallen zonder leidend 0 (max 12 cijfers)",
+                "fr": "Nombres sans tête 0 (max. 12 chiffres)",
                 "it": "Numeri senza piombo 0 (max 12 cifre)",
                 "es": "Números sin plomo 0 (máximo 12 dígitos)",
-                "pl": "Liczby bez wskazania 0 (max 12)",
-                "zh-cn": "未领0.(12个数字)的数字"
+                "pl": "Liczba bez 0 (max 12 cyfr)",
+                "uk": "Кількість без провідних 0 (макс 12 цифр)",
+                "zh-cn": "未领先 0 的数字( 最多 12 位数)"
               },
               "min": 1,
               "max": 999999999999,
@@ -322,8 +339,9 @@
                 "fr": "Adresse",
                 "it": "Indirizzo",
                 "es": "Dirección",
-                "pl": "Addressa",
-                "zh-cn": "问题"
+                "pl": "Adres",
+                "uk": "Контакти",
+                "zh-cn": "地址"
               },
               "min": 1,
               "max": 255,
@@ -338,14 +356,15 @@
               "title": {
                 "en": "Device",
                 "de": "Gerät",
-                "ru": "Устройства",
+                "ru": "Устройство",
                 "pt": "Dispositivo",
-                "nl": "Vernietiging",
-                "fr": "Dispositif",
+                "nl": "Apparaat",
+                "fr": "Appareil",
                 "it": "Dispositivo",
                 "es": "Dispositivo",
-                "pl": "Device",
-                "zh-cn": "证人"
+                "pl": "Urządzenie",
+                "uk": "Пристрої",
+                "zh-cn": "设备"
               },
               "min": 0,
               "max": 7,
@@ -360,13 +379,14 @@
               "title": {
                 "en": "Area",
                 "de": "Bereich",
-                "ru": "Площадь",
+                "ru": "Область",
                 "pt": "Área",
-                "nl": "Area",
-                "fr": "Zone",
+                "nl": "Gebied",
+                "fr": "Domaine",
                 "it": "Settore",
                 "es": "Zona",
-                "pl": "Area",
+                "pl": "Obszar",
+                "uk": "Площа",
                 "zh-cn": "区域"
               },
               "min": 0,
