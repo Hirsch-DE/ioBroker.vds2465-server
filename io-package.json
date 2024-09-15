@@ -134,7 +134,6 @@
       "license": "MIT"
     },
     "platform": "Javascript/Node.js",
-    "main": "main.js",
     "icon": "vds2465-server.png",
     "enabled": true,
     "extIcon": "https://raw.githubusercontent.com/Hirsch-DE/ioBroker.vds2465-server/main/admin/vds2465-server.png",
