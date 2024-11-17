@@ -1,6 +1,6 @@
 {
   "name": "iobroker.vds2465-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Empfänger von VdS2465-Meldungen",
   "author": {
     "name": "Hirsch-DE",
@@ -24,7 +24,7 @@
     "url": "https://github.com/Hirsch-DE/ioBroker.vds2465-server"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^3.1.6"
+    "@iobroker/adapter-core": "^3.2.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.0",

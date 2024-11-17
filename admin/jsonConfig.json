@@ -1,6 +1,9 @@
 {
   "type": "tabs",
   "i18n":  false,
+  "tabsStyle": {
+    "width": "calc(100% - 100px)"
+  },
   "items": {
     "mainTab": {
       "type": "panel",
@@ -22,9 +25,11 @@
           "type": "ip",
           "listenOnAllPorts": true,
           "label": "IP",
+          "xs": 12,
           "sm": 12,
           "md": 8,
-          "lg": 5
+          "lg": 5,
+          "xl": 5
         },
         "bindPort": {
           "type": "number",
@@ -43,9 +48,11 @@
             "uk": "портрети",
             "zh-cn": "端口"
           },
+          "xs": 12,
           "sm": 12,
           "md": 4,
-          "lg": 3
+          "lg": 3,
+          "xl": 3
         },
         "pollIntervall": {
           "type": "number",
@@ -77,9 +84,11 @@
             "uk": "й",
             "zh-cn": "安全"
           },
+          "xs": 12,
           "sm": 12,
           "md": 6,
-          "lg": 2
+          "lg": 2,
+          "xl": 2
         }
       }
     },
@@ -101,6 +110,11 @@
       "items": {
         "_explanation": {
           "type": "staticText",
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
           "text": {
             "en": "Parameters for the individual dialing devices",
             "de": "Parameter für die einzelnen Wähleinrichtungen",
@@ -116,7 +130,11 @@
           }
         },
         "devices": {
+          "xs": 12,
           "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
           "newLine": true,
           "type": "table",
           "items": [
@@ -274,6 +292,11 @@
       "items": {
         "_explanation": {
           "type": "staticText",
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
           "text": {
             "en": "Parameters for creating relays",
             "de": "Parameter für die Erstellung von Relais",
@@ -289,7 +312,11 @@
           }
         },
         "relais": {
+          "xs": 12,
           "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
           "newLine": true,
           "type": "table",
           "items": [

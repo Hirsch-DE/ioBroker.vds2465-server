@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vds2465-server",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "news": {
+      "1.0.1":{
+        "en": "Packages updated\nDesign adaptation",
+        "de": "Pakete aktualisiert\nDesign Anpassungen",
+        "ru": "Обновленные пакеты\nНастройка дизайна",
+        "pt": "Pacotes atualizados\nPersonalização de design",
+        "nl": "Pakketten bijgewerkt\nOntwerp maatwerk",
+        "fr": "Mise à jour des paquets\nPersonnalisation du design",
+        "it": "Pacchetti aggiornati\nPersonalizzazione del design",
+        "es": "Paquetes actualizados\nPersonalización del diseño",
+        "pl": "Aktualizacja pakietów\nPersonalizacja projektu",
+        "uk": "Пакети оновлені\nНалаштування дизайну",
+        "zh-cn": "更新软件包\n設計客製化"
+      },
       "1.0.0":{
         "en": "Packages updated\nMinimum node.js version is 18.x",
         "de": "Pakete aktualisiert\nMinimal node.js version ist 18.x",
@@ -80,19 +93,6 @@
         "pl": "Napraw licznik RC",
         "uk": "Виправити RC-Counter",
         "zh-cn": "修复 RC 计数器"
-      },
-      "0.1.2": {
-        "en": "Fix TC-Counter\nFix RC-Counter\nvarious small adjustments",
-        "de": "Fix TC-Counter\nFix RC-Counter\ndiverse kleine Anpassungen",
-        "ru": "Исправить TC-счетчик\nИсправить RC-счетчик\nразличные небольшие настройки",
-        "pt": "Consertar TC-Counter\nConsertar RC-Counter\nvários pequenos ajustes",
-        "nl": "TC-teller repareren\nRC-teller repareren\nverschillende kleine aanpassingen",
-        "fr": "Correction du compteur TC\nCorrection du compteur RC\ndivers petits ajustements",
-        "it": "Risolto il problema del contatore TC\nRisolto il problema del contatore RC\nvari piccoli aggiustamenti",
-        "es": "Arreglar contador TC\nArreglar contador RC\ndiversos pequeños ajustes",
-        "pl": "Napraw licznik TC\nNapraw licznik RC\nróżne małe przystosowanie",
-        "uk": "Виправити TC-Counter\nВиправити RC-Counter\nрізні дрібні коригування",
-        "zh-cn": "修复 TC 计数器\n修复 RC 计数器\n各种小额调整"
       }
     },
     "titleLang": {
