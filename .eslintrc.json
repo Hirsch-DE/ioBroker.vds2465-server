@@ -18,6 +18,7 @@
 			}
 		],
 		"no-console": "off",
+		"no-fallthrough": "warn",
 		"no-unused-vars": [
 			"error",
 			{
