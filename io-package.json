@@ -154,7 +154,7 @@
     "supportCustoms": false,
     "globalDependencies": [
       {
-        "admin": ">=5.1.28"
+        "admin": ">=6.17.14"
       }
     ],
     "dependencies": [

@@ -15,10 +15,9 @@ const vdsmeldungen = require('./lib/vds2465.json');
 const net = require('net');
 
 let servertcp; // Server instance TCP
-let isCreateStructur = false;
 let isChangeConnect = false;
-let queueConnect = [];
-let devicesConnected = [];
+const queueConnect = [];
+const devicesConnected = [];
 
 class Vds2465Server extends utils.Adapter {
 
@@ -97,7 +96,7 @@ class Vds2465Server extends utils.Adapter {
 				servertcp.close();
 				this.setState('info.connection', false, true);
 				while (devicesConnected.length > 0) {
-					let obj = devicesConnected.shift();
+					const obj = devicesConnected.shift();
 					//this.setConnectState(obj.id, false, null);
 					obj.ae.disconnect();
 				}
@@ -134,9 +133,9 @@ class Vds2465Server extends utils.Adapter {
 		if (state) {
 			// The state was changed
 			if (!state.ack) {
-				let tmp = id.split('.');
+				const tmp = id.split('.');
 				tmp.pop();
-				let channelid = tmp.join('.');
+				const channelid = tmp.join('.');
 				this.log.debug(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
 				if (id.indexOf('.abfrage') > 0) {
 					this.getObject(id, (err, obj) => {
@@ -145,7 +144,7 @@ class Vds2465Server extends utils.Adapter {
 							this.log.debug(err);
 						} else {
 							//this.log.debug(JSON.stringify(obj));
-							if (obj && obj.native.hasOwnProperty('status')) {
+							if (obj && Object.prototype.hasOwnProperty.call(obj.native, 'status')) {
 								//this.log.debug(obj.native.status);
 								this.sendCommand(channelid, obj.native.status);
 							}
@@ -157,10 +156,10 @@ class Vds2465Server extends utils.Adapter {
 							// @ts-ignore
 							this.log.debug(err);
 						} else {
-							if (obj && obj.native.hasOwnProperty('ein') && state.val) {
+							if (obj && Object.prototype.hasOwnProperty.call(obj.native, 'ein') && state.val) {
 								//this.log.debug(obj.native.ein);
 								this.sendCommand(channelid, obj.native.ein);
-							} else if (obj && obj.native.hasOwnProperty('aus') && !state.val) {
+							} else if (obj && Object.prototype.hasOwnProperty.call(obj.native, 'aus') && !state.val) {
 								//this.log.debug(obj.native.aus);
 								this.sendCommand(channelid, obj.native.aus);
 							}
@@ -197,7 +196,7 @@ class Vds2465Server extends utils.Adapter {
 	serverStart() {
 		servertcp = net.createServer(this.onClientConnected.bind(this));
 		servertcp.listen(this.config.bindPort, this.config.bindIP, () => {
-			let text = 'Server listening on IP-Adress (TCP): ' + servertcp.address().address + ':' + servertcp.address().port;
+			const text = 'Server listening on IP-Adress (TCP): ' + servertcp.address().address + ':' + servertcp.address().port;
 			this.log.info(text);
 			this.setState('info.connection', true, true);
 		});
@@ -205,13 +204,13 @@ class Vds2465Server extends utils.Adapter {
 			this.log.error(e.message);
 		});
 	}
-	
+
 	/**
 	* alarm system connected (TCP/IP)
 	* @param {net.Socket} sock - socket
 	*/
 	onClientConnected(sock) {
-		let remoteAddress = sock.remoteAddress + ':' + sock.remotePort;
+		const remoteAddress = sock.remoteAddress + ':' + sock.remotePort;
 		this.log.debug('Verbindung von ' + remoteAddress);
 		const AE = new vds();
 
@@ -374,7 +373,7 @@ class Vds2465Server extends utils.Adapter {
 	* @param {String} command Vollständiger Satz (0x02 oder 0x10)
 	*/
 	async sendCommand(channelid, command) {
-		let identnr = (channelid.split('.'))[2];
+		const identnr = (channelid.split('.'))[2];
 		this.log.debug(`Befehl: ${command} fuer id: ${identnr}`);
 		for (let i = 0; i < devicesConnected.length; i++) {
 			if (devicesConnected[i].id === identnr) {
@@ -394,14 +393,12 @@ class Vds2465Server extends utils.Adapter {
 	*/
 	async grundstrukturAnlegen(id) {
 		try {
-			isCreateStructur = true;
-			let objectCheck = await this.getStateAsync(`${id}.Info.merkmale`);
+			const objectCheck = await this.getStateAsync(`${id}.Info.merkmale`);
 			if (objectCheck) {
-				isCreateStructur = false;
 				return;
 			}
 			await this.createDeviceAsync(id, { 'name': id });
-			await this.createChannelAsync(id, 'Info', { 'name': "Information" });
+			await this.createChannelAsync(id, 'Info', { 'name': 'Information' });
 			await this.createStateAsync(id, 'Info', 'zustand', {
 				'role': 'indicator.connected',
 				'name': 'Verbindung steht',
@@ -436,8 +433,6 @@ class Vds2465Server extends utils.Adapter {
 			});
 		} catch (e) {
 			this.log.error('grundstrukturAnlegen: ' + e);
-		} finally{
-			isCreateStructur = false;
 		}
 	}
 
@@ -452,13 +447,13 @@ class Vds2465Server extends utils.Adapter {
 	* @return {Promise<String>} ID vom State
 	*/
 	async linieAnlegen(id, li, ge, be, az, art) {
-		let channel_id = `${id}.${art}_${li}-${ge}-${be}-${az}`;
+		const channel_id = `${id}.${art}_${li}-${ge}-${be}-${az}`;
 		try {
-			let obj = await this.getObjectAsync(channel_id);
+			const obj = await this.getObjectAsync(channel_id);
 			if (!obj) {
-				let channel = `${art}_${li}-${ge}-${be}-${az}`;
-				let name = `Li:${li} Ge:${ge} Be:${be} AdrZus:${az}`;
-				let gebe = (ge << 4 & 0xF0) | (be & 0x0F);
+				const channel = `${art}_${li}-${ge}-${be}-${az}`;
+				const name = `Li:${li} Ge:${ge} Be:${be} AdrZus:${az}`;
+				const gebe = (ge << 4 & 0xF0) | (be & 0x0F);
 				let Adresserweiterung;
 				if (art === 'Stoerung') {
 					switch (li) {
@@ -686,11 +681,10 @@ class Vds2465Server extends utils.Adapter {
 						break;
 				}
 			}
+			return channel_id;
 		}
 		catch (e) {
 			this.log.error('linieAnlegen: ' + e);
-		}
-		finally {
 			return channel_id;
 		}
 	}
@@ -707,23 +701,24 @@ class Vds2465Server extends utils.Adapter {
 	async zerlegeDaten(id, obj) {
 		let channel = '';
 		try {
-			let date = new Date();
-			let zeit = date.toLocaleString('de-DE');
+			const date = new Date();
+			const zeit = date.toLocaleString('de-DE');
 
 			await this.grundstrukturAnlegen(id);
 
 			let Meldungszeit = '';
-			if (obj.hasOwnProperty('Satz_50')) {
-				let zeit = new Date(obj['Satz_50'].Value);
+			if (Object.prototype.hasOwnProperty.call(obj, 'Satz_50')) {
+				const zeit = new Date(obj['Satz_50'].Value);
 				Meldungszeit = zeit.toLocaleString('de-DE');
 			}
-			if (obj.hasOwnProperty('Satz_2') || obj.hasOwnProperty('Satz_3') || obj.hasOwnProperty('Satz_4') || obj.hasOwnProperty('Satz_20')) {
+			if (Object.prototype.hasOwnProperty.call(obj, 'Satz_2') || Object.prototype.hasOwnProperty.call(obj, 'Satz_3') ||
+			Object.prototype.hasOwnProperty.call(obj, 'Satz_4') || Object.prototype.hasOwnProperty.call(obj, 'Satz_20')) {
 				let satz = 'Satz_2';
-				if (obj.hasOwnProperty('Satz_3')) {
+				if (Object.prototype.hasOwnProperty.call(obj, 'Satz_3')) {
 					satz = 'Satz_3';
-				} else if (obj.hasOwnProperty('Satz_4')) {
+				} else if (Object.prototype.hasOwnProperty.call(obj, 'Satz_4')) {
 					satz = 'Satz_4';
-				} else if (obj.hasOwnProperty('Satz_20')) {
+				} else if (Object.prototype.hasOwnProperty.call(obj, 'Satz_20')) {
 					satz = 'Satz_20';
 				}
 				channel = await this.linieAnlegen(id, obj[satz].Adresse, obj[satz].Geraet, obj[satz].Bereich, obj[satz].Adresszusatz, obj[satz].Adresserweiterung);
@@ -737,10 +732,10 @@ class Vds2465Server extends utils.Adapter {
 					await this.setStateAsync(channel + '.meldungszustand', obj[satz].Meldungsart < 128 ? true : false, true);
 					await this.setStateAsync(channel + '.meldungsart', obj[satz].Meldungsart, true);
 					await this.setStateAsync(channel + '.meldungVds', name, true);
-					await this.setStateAsync(channel + '.text', obj.hasOwnProperty('Satz_54') ? obj['Satz_54'].Value : '', true);
+					await this.setStateAsync(channel + '.text', Object.prototype.hasOwnProperty.call(obj, 'Satz_54') ? obj['Satz_54'].Value : '', true);
 					await this.setStateAsync(channel + '.zeit_meldung', Meldungszeit, true);
 					await this.setStateAsync(channel + '.zeit_empfang', zeit, true);
-					await this.setStateAsync(channel + '.weg', obj.hasOwnProperty('Satz_61') ? obj['Satz_61'].Value : '', true);
+					await this.setStateAsync(channel + '.weg', Object.prototype.hasOwnProperty.call(obj, 'Satz_61') ? obj['Satz_61'].Value : '', true);
 				} else if (obj[satz].Adresserweiterung === 'Ausgang') {
 					await this.setStateAsync(channel + '.ausgangszustand', obj[satz].Meldungsart < 128 ? true : false, true);
 					await this.setStateAsync(channel + '.zeit_empfang', zeit, true);
@@ -749,29 +744,29 @@ class Vds2465Server extends utils.Adapter {
 				} else {
 					await this.setStateAsync(channel + '.meldungszustand', obj[satz].Meldungsart < 128 ? true : false, true);
 					await this.setStateAsync(channel + '.meldungsart', obj[satz].Meldungsart, true);
-					await this.setStateAsync(channel + '.text', obj.hasOwnProperty('Satz_54') ? obj['Satz_54'].Value : '', true);
+					await this.setStateAsync(channel + '.text', Object.prototype.hasOwnProperty.call(obj, 'Satz_54') ? obj['Satz_54'].Value : '', true);
 					await this.setStateAsync(channel + '.zeit_meldung', Meldungszeit, true);
 					await this.setStateAsync(channel + '.zeit_empfang', zeit, true);
 					await this.setStateAsync(channel + '.abfrage', false, true);
 					await this.setStateAsync(channel + '.fehler', '', true);
 				}
 			}
-			if (obj.hasOwnProperty('Satz_3')) {
+			if (Object.prototype.hasOwnProperty.call(obj, 'Satz_3')) {
 				await this.checkCommand(channel, '', 0x03);
 			}
-			if (obj.hasOwnProperty('Satz_11')) {
+			if (Object.prototype.hasOwnProperty.call(obj, 'Satz_11')) {
 				await this.checkCommand(id, obj['Satz_11'].Value, 0x11);
 			}
-			if (obj.hasOwnProperty('Satz_20')) {
+			if (Object.prototype.hasOwnProperty.call(obj, 'Satz_20')) {
 				await this.checkCommand(channel, '', 0x20);
 			}
-			if (obj.hasOwnProperty('Satz_40')) {
+			if (Object.prototype.hasOwnProperty.call(obj, 'Satz_40')) {
 				await this.setStateAsync(`${id}.Info.letzteTestmeldung`, zeit, true);
 			}
-			if (obj.hasOwnProperty('Satz_51')) {
+			if (Object.prototype.hasOwnProperty.call(obj, 'Satz_51')) {
 				await this.setStateAsync(`${id}.Info.hersteller`, obj['Satz_51'].Value, true);
 			}
-			if (obj.hasOwnProperty('Satz_59')) {
+			if (Object.prototype.hasOwnProperty.call(obj, 'Satz_59')) {
 				await this.setStateAsync(`${id}.Info.merkmale`, obj['Satz_59'].Value, true);
 			}
 		} catch (e) {
