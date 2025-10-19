@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vds2465-server",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "news": {
+      "1.0.3":{
+        "en": "Fix npm publish\ndependencies updated",
+        "de": "Npm veröffentlichen\naktualisierte abhängigkeiten",
+        "ru": "Издательство Fix npm\nобновленные зависимости",
+        "pt": "Corrigir a publicação do npm\ndependências atualizadas",
+        "nl": "Fix npm publiceren\nafhankelijkheden bijgewerkt",
+        "fr": "Correction de npm publier\ndépendances mises à jour",
+        "it": "Fisso npm pubblicazione\ndipendenze aggiornate",
+        "es": "Corrección npm publicar\ndependencias actualizadas",
+        "pl": "Napraw publikację npm\nzaktualizowane zależności",
+        "uk": "Виправлення npm опублікування\nоновлені залежності",
+        "zh-cn": "修复 npm 发布\n更新依赖关系"
+      },
       "1.0.2":{
         "en": "Packages updated",
         "de": "Pakete aktualisiert",
@@ -80,19 +93,6 @@
         "pl": "Napraw Sprawdź zduplikowane połączenia",
         "uk": "Виправлення. Перевірте повторювані підключення",
         "zh-cn": "修復檢查重複連接"
-      },
-      "0.1.4": {
-        "en": "TC counter checked at IK7\nText encoding changed to ISO 8859-1",
-        "de": "TC-Counter bei IK7 geprüft\nEncoding bei Text auf ISO 8859-1 geändert",
-        "ru": "Счетчик ТС проверен на ИК7\nКодировка текста изменена на ISO 8859-1.",
-        "pt": "Contador TC verificado em IK7\nCodificação de texto alterada para ISO 8859-1",
-        "nl": "TC-teller gecontroleerd op IK7\nTekstcodering gewijzigd in ISO 8859-1",
-        "fr": "Compteur TC vérifié à IK7\nCodage du texte changé en ISO 8859-1",
-        "it": "Contatore TC controllato a IK7\nCodifica del testo modificata in ISO 8859-1",
-        "es": "Contador TC comprobado en IK7\nLa codificación de texto cambió a ISO 8859-1",
-        "pl": "Licznik TC sprawdzony na IK7\nKodowanie tekstu zmieniono na ISO 8859-1",
-        "uk": "Лічильник TC перевірено на IK7\nКодування тексту змінено на ISO 8859-1",
-        "zh-cn": "在 IK7 檢查 TC 計數器\n文本編碼更改為 ISO 8859-1"
       }
     },
     "titleLang": {
