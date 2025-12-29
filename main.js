@@ -47,6 +47,11 @@ class Vds2465Server extends utils.Adapter {
         // The adapters config (in the instance object everything under the attribute "native") is accessible via
         let channel;
         try {
+            for (let i = 0; i < this.config.devices.length; i++) {
+                // @ts-expect-error identnr
+                const id = this.config.devices[i].identnr.toString();
+                await this.grundstrukturAnlegen(id);
+            }
             for (let i = 0; i < this.config.relais.length; i++) {
                 // @ts-expect-error identnr
                 const id = this.config.relais[i].identnr.toString();
@@ -67,18 +72,18 @@ class Vds2465Server extends utils.Adapter {
         }
 
         /*
-		await this.setObjectNotExistsAsync('testVariable', {
-			type: 'state',
-			common: {
-				name: 'testVariable',
-				type: 'string',
-				role: 'indicator',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-		*/
+        await this.setObjectNotExistsAsync('testVariable', {
+            type: 'state',
+            common: {
+                name: 'testVariable',
+                type: 'string',
+                role: 'indicator',
+                read: true,
+                write: true,
+            },
+            native: {},
+        });
+        */
         this.subscribeStates('*.abfrage');
         this.subscribeStates('*.ausgangszustand');
 
@@ -121,13 +126,13 @@ class Vds2465Server extends utils.Adapter {
     //  * @param {ioBroker.Object | null | undefined} obj
     //  */
     // onObjectChange(id, obj) {
-    // 	if (obj) {
-    // 		// The object was changed
-    // 		this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-    // 	} else {
-    // 		// The object was deleted
-    // 		this.log.info(`object ${id} deleted`);
-    // 	}
+    //     if (obj) {
+    //         // The object was changed
+    //         this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
+    //     } else {
+    //         // The object was deleted
+    //         this.log.info(`object ${id} deleted`);
+    //     }
     // }
 
     /**
@@ -410,42 +415,91 @@ class Vds2465Server extends utils.Adapter {
         try {
             const objectCheck = await this.getStateAsync(`${id}.Info.merkmale`);
             if (objectCheck) {
+                const Obj = await this.getObjectAsync(id);
+                if (!Object.prototype.hasOwnProperty.call(Obj.common, 'statusStates')) {
+                    await this.extendObjectAsync(
+                        id,
+                        {
+                            type: 'device',
+                            common: {
+                                statusStates: {
+                                    onlineId: `vds2465-server.${this.instance}.${id}.Info.zustand`,
+                                },
+                            },
+                            native: {},
+                        },
+                        { preserve: { common: ['name'] } },
+                    );
+                }
                 return;
             }
-            await this.createDeviceAsync(id, { name: id });
-            await this.createChannelAsync(id, 'Info', { name: 'Information' });
-            await this.createStateAsync(id, 'Info', 'zustand', {
-                role: 'indicator.connected',
-                name: 'Verbindung steht',
-                type: 'boolean',
-                read: true,
-                write: false,
-                def: false,
+            await this.extendObjectAsync(id, {
+                type: 'device',
+                common: {
+                    name: id,
+                    statusStates: {
+                        onlineId: `vds2465-server.${this.instance}.${id}.Info.zustand`,
+                    },
+                },
+                native: {},
             });
-            await this.createStateAsync(id, 'Info', 'letzteTestmeldung', {
-                role: 'info',
-                name: 'Letzte Testmeldung',
-                type: 'string',
-                read: true,
-                write: false,
-                def: '',
+            await this.extendObjectAsync(`${id}.Info`, {
+                type: 'channel',
+                common: {
+                    name: 'Information',
+                    type: 'string',
+                },
+                native: {},
             });
-            await this.createStateAsync(id, 'Info', 'hersteller', {
-                role: 'info',
-                name: 'Herstellerinfo',
-                type: 'string',
-                read: true,
-                write: false,
-                def: '',
+            await this.extendObjectAsync(`${id}.Info.zustand`, {
+                type: 'state',
+                common: {
+                    role: 'indicator.connected',
+                    name: 'Verbindung steht',
+                    type: 'boolean',
+                    read: true,
+                    write: false,
+                    def: false,
+                },
+                native: {},
             });
-            await this.createStateAsync(id, 'Info', 'merkmale', {
-                role: 'info',
-                name: 'Geraetemerkmale',
-                type: 'string',
-                read: true,
-                write: false,
-                def: '',
+            await this.extendObjectAsync(`${id}.Info.letzteTestmeldung`, {
+                type: 'state',
+                common: {
+                    role: 'info',
+                    name: 'Letzte Testmeldung',
+                    type: 'string',
+                    read: true,
+                    write: false,
+                    def: '',
+                },
+                native: {},
             });
+            await this.extendObjectAsync(`${id}.Info.hersteller`, {
+                type: 'state',
+                common: {
+                    role: 'info',
+                    name: 'Herstellerinfo',
+                    type: 'string',
+                    read: true,
+                    write: false,
+                    def: '',
+                },
+                native: {},
+            });
+            await this.extendObjectAsync(`${id}.Info.merkmale`, {
+                type: 'state',
+                common: {
+                    role: 'info',
+                    name: 'Geraetemerkmale',
+                    type: 'string',
+                    read: true,
+                    write: false,
+                    def: '',
+                },
+                native: {},
+            });
+            this.log.info(`Device: ${id} angelegt`);
         } catch (e) {
             this.log.error(`grundstrukturAnlegen: ${e}`);
         }
@@ -474,125 +528,202 @@ class Vds2465Server extends utils.Adapter {
                 if (art === 'Stoerung') {
                     switch (li) {
                         case 1:
-                            await this.createChannelAsync(id, channel, { name: 'Unterspannung' });
+                            await this.extendObjectAsync(`${id}.${channel}`, {
+                                type: 'channel',
+                                common: {
+                                    name: 'Unterspannung',
+                                    type: 'string',
+                                },
+                                native: {},
+                            });
                             break;
                         case 2:
-                            await this.createChannelAsync(id, channel, { name: 'Akkufehler' });
+                            await this.extendObjectAsync(`${id}.${channel}`, {
+                                type: 'channel',
+                                common: {
+                                    name: 'Akkufehler',
+                                    type: 'string',
+                                },
+                                native: {},
+                            });
                             break;
                         case 3:
-                            await this.createChannelAsync(id, channel, { name: 'Netzfehler' });
+                            await this.extendObjectAsync(`${id}.${channel}`, {
+                                type: 'channel',
+                                common: {
+                                    name: 'Netzfehler',
+                                    type: 'string',
+                                },
+                                native: {},
+                            });
                             break;
                         case 17:
-                            await this.createChannelAsync(id, channel, { name: 'Fehler Uebertragungs-Primaerweg' });
+                            await this.extendObjectAsync(`${id}.${channel}`, {
+                                type: 'channel',
+                                common: {
+                                    name: 'Fehler Uebertragungs-Primaerweg',
+                                    type: 'string',
+                                },
+                                native: {},
+                            });
                             break;
                         case 18:
-                            await this.createChannelAsync(id, channel, { name: 'Fehler Uebertragungs-Ersatzweg' });
+                            await this.extendObjectAsync(`${id}.${channel}`, {
+                                type: 'channel',
+                                common: {
+                                    name: 'Fehler Uebertragungs-Ersatzweg',
+                                    type: 'string',
+                                },
+                                native: {},
+                            });
                             break;
                         default:
-                            await this.createChannelAsync(id, channel);
+                            await this.extendObjectAsync(`${id}.${channel}`, {
+                                type: 'channel',
+                                common: {
+                                    name: channel,
+                                    type: 'string',
+                                },
+                                native: {},
+                            });
                             break;
                     }
                 } else {
-                    await this.createChannelAsync(id, channel, { name: name });
+                    await this.extendObjectAsync(`${id}.${channel}`, {
+                        type: 'channel',
+                        common: {
+                            name: name,
+                            type: 'string',
+                        },
+                        native: {},
+                    });
                 }
                 switch (art) {
                     case 'Eingang':
                         Adresserweiterung = 1;
-                        await this.createStateAsync(id, channel, 'meldungszustand', {
-                            role: 'indicator.state',
-                            name: 'Meldungszustand',
-                            type: 'boolean',
-                            read: true,
-                            write: false,
-                            def: false,
-                            states: {
-                                true: 'Ein',
-                                false: 'Aus',
+                        await this.extendObjectAsync(`${id}.${channel}.meldungszustand`, {
+                            type: 'state',
+                            common: {
+                                name: 'Meldungszustand',
+                                type: 'boolean',
+                                role: 'indicator.state',
+                                read: true,
+                                write: false,
+                                def: false,
+                                states: {
+                                    true: 'Ein',
+                                    false: 'Aus',
+                                },
                             },
+                            native: {},
                         });
-                        await this.createStateAsync(id, channel, 'meldungsart', {
-                            role: 'value',
-                            name: 'Meldungsart',
-                            type: 'number',
-                            read: true,
-                            write: false,
-                            def: 128,
+                        await this.extendObjectAsync(`${id}.${channel}.meldungsart`, {
+                            type: 'state',
+                            common: {
+                                name: 'Meldungsart',
+                                type: 'number',
+                                role: 'value',
+                                read: true,
+                                write: false,
+                                def: 128,
+                            },
+                            native: {},
                         });
-                        await this.createStateAsync(id, channel, 'meldungVds', {
-                            role: 'value',
-                            name: 'Text',
-                            type: 'string',
-                            read: true,
-                            write: false,
-                            def: '',
+                        await this.extendObjectAsync(`${id}.${channel}.meldungVds`, {
+                            type: 'state',
+                            common: {
+                                name: 'Text',
+                                type: 'string',
+                                role: 'value',
+                                read: true,
+                                write: false,
+                                def: '',
+                            },
+                            native: {},
                         });
-                        await this.createStateAsync(id, channel, 'text', {
-                            role: 'value',
-                            name: 'Text zur Meldung',
-                            type: 'string',
-                            read: true,
-                            write: false,
-                            def: '',
+                        await this.extendObjectAsync(`${id}.${channel}.text`, {
+                            type: 'state',
+                            common: {
+                                name: 'Text zur Meldung',
+                                type: 'string',
+                                role: 'value',
+                                read: true,
+                                write: false,
+                                def: '',
+                            },
+                            native: {},
                         });
-                        await this.createStateAsync(id, channel, 'zeit_meldung', {
-                            role: 'datetime',
-                            name: 'Zeitpunkt der Ausloesung',
-                            type: 'string',
-                            read: true,
-                            write: false,
-                            def: '',
+                        await this.extendObjectAsync(`${id}.${channel}.zeit_meldung`, {
+                            type: 'state',
+                            common: {
+                                name: 'Zeitpunkt der Ausloesung',
+                                type: 'string',
+                                role: 'datetime',
+                                read: true,
+                                write: false,
+                                def: '',
+                            },
+                            native: {},
                         });
-                        await this.createStateAsync(id, channel, 'zeit_empfang', {
-                            role: 'datetime',
-                            name: 'Zeitpunkt des Empfangs',
-                            type: 'string',
-                            read: true,
-                            write: false,
-                            def: '',
+                        await this.extendObjectAsync(`${id}.${channel}.zeit_empfang`, {
+                            type: 'state',
+                            common: {
+                                name: 'Zeitpunkt des Empfangs',
+                                type: 'string',
+                                role: 'datetime',
+                                read: true,
+                                write: false,
+                                def: '',
+                            },
+                            native: {},
                         });
-                        await this.createStateAsync(id, channel, 'weg', {
-                            role: 'value',
-                            name: 'Uebertragungsweg',
-                            type: 'string',
-                            read: true,
-                            write: false,
-                            def: '',
+                        await this.extendObjectAsync(`${id}.${channel}.weg`, {
+                            type: 'state',
+                            common: {
+                                name: 'Uebertragungsweg',
+                                type: 'string',
+                                role: 'value',
+                                read: true,
+                                write: false,
+                                def: '',
+                            },
+                            native: {},
                         });
-                        await this.createStateAsync(id, channel, 'fehler', {
-                            role: 'info',
-                            name: 'Fehlermeldung',
-                            type: 'string',
-                            read: true,
-                            write: false,
-                            def: '',
+                        await this.extendObjectAsync(`${id}.${channel}.fehler`, {
+                            type: 'state',
+                            common: {
+                                name: 'Fehlermeldung',
+                                type: 'string',
+                                role: 'info',
+                                read: true,
+                                write: false,
+                                def: '',
+                            },
+                            native: {},
                         });
-                        await this.createStateAsync(
-                            id,
-                            channel,
-                            'abfrage',
-                            {
-                                role: 'button',
+                        await this.extendObjectAsync(`${id}.${channel}.abfrage`, {
+                            type: 'state',
+                            common: {
                                 name: 'Abfrage des Zustands',
                                 type: 'boolean',
+                                role: 'button',
                                 read: true,
                                 write: true,
                                 def: false,
                             },
-                            {
+                            native: {
                                 status: Buffer.from([5, 0x10, gebe, li, az, Adresserweiterung, 0x20]).toString('hex'),
                             },
-                        );
+                        });
                         break;
                     case 'Ausgang':
                         Adresserweiterung = 2;
-                        await this.createStateAsync(
-                            id,
-                            channel,
-                            'ausgangszustand',
-                            {
-                                role: 'indicator.state',
+                        await this.extendObjectAsync(`${id}.${channel}.ausgangszustand`, {
+                            type: 'state',
+                            common: {
                                 name: 'Ausgangszustand',
                                 type: 'boolean',
+                                role: 'indicator.state',
                                 read: true,
                                 write: true,
                                 def: false,
@@ -601,122 +732,154 @@ class Vds2465Server extends utils.Adapter {
                                     false: 'Aus',
                                 },
                             },
-                            {
+                            native: {
                                 ein: Buffer.from([5, 2, gebe, li, az, Adresserweiterung, 0]).toString('hex'),
                                 aus: Buffer.from([5, 2, gebe, li, az, Adresserweiterung, 128]).toString('hex'),
                             },
-                        );
-                        await this.createStateAsync(id, channel, 'zeit_empfang', {
-                            role: 'datetime',
-                            name: 'Zeitpunkt des Empfangs',
-                            type: 'string',
-                            read: true,
-                            write: false,
-                            def: '',
                         });
-                        await this.createStateAsync(id, channel, 'fehler', {
-                            role: 'info',
-                            name: 'Fehlermeldung',
-                            type: 'string',
-                            read: true,
-                            write: false,
-                            def: '',
+                        await this.extendObjectAsync(`${id}.${channel}.zeit_empfang`, {
+                            type: 'state',
+                            common: {
+                                name: 'Zeitpunkt des Empfangs',
+                                type: 'string',
+                                role: 'datetime',
+                                read: true,
+                                write: false,
+                                def: '',
+                            },
+                            native: {},
                         });
-                        await this.createStateAsync(
-                            id,
-                            channel,
-                            'abfrage',
-                            {
-                                role: 'button',
+                        await this.extendObjectAsync(`${id}.${channel}.fehler`, {
+                            type: 'state',
+                            common: {
+                                name: 'Fehlermeldung',
+                                type: 'string',
+                                role: 'info',
+                                read: true,
+                                write: false,
+                                def: '',
+                            },
+                            native: {},
+                        });
+                        await this.extendObjectAsync(`${id}.${channel}.abfrage`, {
+                            type: 'state',
+                            common: {
                                 name: 'Abfrage des Zustands',
                                 type: 'boolean',
+                                role: 'button',
                                 read: true,
                                 write: true,
                                 def: false,
                             },
-                            {
+                            native: {
                                 status: Buffer.from([5, 0x10, gebe, li, az, Adresserweiterung, 0x20]).toString('hex'),
                             },
-                        );
+                        });
                         break;
                     case 'Stoerung':
                         Adresserweiterung = 0x10;
-                        await this.createStateAsync(id, channel, 'meldungszustand', {
-                            role: 'indicator.state',
-                            name: 'Meldungszustand',
-                            type: 'boolean',
-                            read: true,
-                            write: false,
-                            def: false,
-                            states: {
-                                true: 'Ein',
-                                false: 'Aus',
+                        await this.extendObjectAsync(`${id}.${channel}.meldungszustand`, {
+                            type: 'state',
+                            common: {
+                                name: 'Meldungszustand',
+                                type: 'boolean',
+                                role: 'indicator.state',
+                                read: true,
+                                write: false,
+                                def: false,
+                                states: {
+                                    true: 'Ein',
+                                    false: 'Aus',
+                                },
                             },
+                            native: {},
                         });
-                        await this.createStateAsync(id, channel, 'meldungsart', {
-                            role: 'value',
-                            name: 'Meldungsart',
-                            type: 'number',
-                            read: true,
-                            write: false,
-                            def: 128,
+                        await this.extendObjectAsync(`${id}.${channel}.meldungsart`, {
+                            type: 'state',
+                            common: {
+                                name: 'Meldungsart',
+                                type: 'number',
+                                role: 'value',
+                                read: true,
+                                write: false,
+                                def: 128,
+                            },
+                            native: {},
                         });
-                        await this.createStateAsync(id, channel, 'meldungVds', {
-                            role: 'value',
-                            name: 'Text',
-                            type: 'string',
-                            read: true,
-                            write: false,
-                            def: '',
+                        await this.extendObjectAsync(`${id}.${channel}.meldungVds`, {
+                            type: 'state',
+                            common: {
+                                name: 'Text',
+                                type: 'string',
+                                role: 'value',
+                                read: true,
+                                write: false,
+                                def: '',
+                            },
+                            native: {},
                         });
-                        await this.createStateAsync(id, channel, 'text', {
-                            role: 'value',
-                            name: 'Text',
-                            type: 'string',
-                            read: true,
-                            write: false,
-                            def: '',
+                        await this.extendObjectAsync(`${id}.${channel}.text`, {
+                            type: 'state',
+                            common: {
+                                name: 'Text',
+                                type: 'string',
+                                role: 'value',
+                                read: true,
+                                write: false,
+                                def: '',
+                            },
+                            native: {},
                         });
-                        await this.createStateAsync(id, channel, 'zeit_meldung', {
-                            role: 'datetime',
-                            name: 'Zeitpunkt der Ausloesung',
-                            type: 'string',
-                            read: true,
-                            write: false,
-                            def: '',
+                        await this.extendObjectAsync(`${id}.${channel}.zeit_meldung`, {
+                            type: 'state',
+                            common: {
+                                name: 'Zeitpunkt der Ausloesung',
+                                type: 'string',
+                                role: 'datetime',
+                                read: true,
+                                write: false,
+                                def: '',
+                            },
+                            native: {},
                         });
-                        await this.createStateAsync(id, channel, 'zeit_empfang', {
-                            role: 'datetime',
-                            name: 'Zeitpunkt des Empfangs',
-                            type: 'string',
-                            read: true,
-                            write: false,
-                            def: '',
+                        await this.extendObjectAsync(`${id}.${channel}.zeit_empfang`, {
+                            type: 'state',
+                            common: {
+                                name: 'Zeitpunkt des Empfangs',
+                                type: 'string',
+                                role: 'datetime',
+                                read: true,
+                                write: false,
+                                def: '',
+                            },
+                            native: {},
                         });
-                        await this.createStateAsync(id, channel, 'fehler', {
-                            role: 'info',
-                            name: 'Fehlermeldung',
-                            type: 'string',
-                            read: true,
-                            write: false,
-                            def: '',
+                        await this.extendObjectAsync(`${id}.${channel}.fehler`, {
+                            type: 'state',
+                            common: {
+                                name: 'Fehlermeldung',
+                                type: 'string',
+                                role: 'info',
+                                read: true,
+                                write: false,
+                                def: '',
+                            },
+                            native: {},
                         });
-                        await this.createStateAsync(
-                            id,
-                            channel,
-                            'abfrage',
-                            {
-                                role: 'button',
+                        await this.extendObjectAsync(`${id}.${channel}.abfrage`, {
+                            type: 'state',
+                            common: {
                                 name: 'Abfrage des Zustands',
                                 type: 'boolean',
+                                role: 'button',
                                 read: true,
                                 write: true,
                                 def: false,
                             },
-                            {
+                            native: {
                                 status: Buffer.from([5, 0x10, gebe, li, az, Adresserweiterung, 0x20]).toString('hex'),
                             },
-                        );
+                        });
                         break;
                 }
             }
