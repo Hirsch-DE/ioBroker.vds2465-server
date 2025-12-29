@@ -6,7 +6,7 @@
         "1.1.0": {
           "en": "devDependencies updated\nChanged create in extendObject\nConnectionState on Device",
           "de": "devDependencies aktualisiert\n Erstellen geändert in extendObject\nConnectionState auf Gerät",
-          "ru": "обновленная независимость Измененное создание в extendObject\nConnectionState на устройстве",
+          "ru": "обновленная независимость\n Измененное создание в extendObject\nConnectionState на устройстве",
           "pt": "devDependências atualizadas\n Criada alterada na extensãoObject\nConnectionState no dispositivo",
           "nl": "devDependencies bijgewerkt\n Veranderd aanmaken in extendObject\nConnectionState op Apparaat",
           "fr": "devDependences updated\n Changed create in extendObject\nConnectionState on Device",
@@ -93,7 +93,7 @@
         "pl": "Informacje na temat szybkiego połączenia i połączenia",
         "uk": "Фіксація для дуже швидкого з'єднання та розірвання зв'язку повідомлень",
         "zh-cn": "迅速建立联系和联系终止信息"
-      },
+      }
     },
     "titleLang": {
       "en": "VdS2465-Server",
