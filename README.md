@@ -43,6 +43,9 @@ Von diesem Adapter wird auch das "Service Request" unterstützt, welches in eini
 
 
 ## Changelog
+### **WORK IN PROGRESS**
+- (copilot) Adapter requires node.js >= 22 now
+
 ### 1.1.0
 * (Hirsch-DE) devDependencies updated
 * (Hirsch-DE) Änderung create in extendObject
