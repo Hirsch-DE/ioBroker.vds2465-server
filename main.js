@@ -11,7 +11,7 @@ const vds = require('./lib/vds2465server.js');
 const vdsmeldungen = require('./lib/vds2465.json');
 
 // Load your modules here, e.g.:
-const net = require('net');
+const net = require('node:net');
 
 let servertcp; // Server instance TCP
 let isChangeConnect = false;
