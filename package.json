@@ -42,7 +42,7 @@
     "typescript": "~5.9"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0"
   },
   "main": "main.js",
   "files": [

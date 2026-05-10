@@ -1,20 +1,33 @@
 {
   "common": {
     "name": "vds2465-server",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "news": {
-        "1.1.0": {
-          "en": "devDependencies updated\nChanged create in extendObject\nConnectionState on Device",
-          "de": "devDependencies aktualisiert\n Erstellen geändert in extendObject\nConnectionState auf Gerät",
-          "ru": "обновленная независимость\n Измененное создание в extendObject\nConnectionState на устройстве",
-          "pt": "devDependências atualizadas\n Criada alterada na extensãoObject\nConnectionState no dispositivo",
-          "nl": "devDependencies bijgewerkt\n Veranderd aanmaken in extendObject\nConnectionState op Apparaat",
-          "fr": "devDependences updated\n Changed create in extendObject\nConnectionState on Device",
-          "it": "sviluppoDependens aggiornato\n Modificato creare in extendObject\nConnectionState sul dispositivo",
-          "es": "devDependencies updated\n Cambios en la extensiónObject\nConnectionState on Device",
-          "pl": "devDependendences updated\n Zmieniono tworzenie w extendObject\nConnectionState na urządzeniu",
-          "uk": "devDepencies оновлений\n Змінено створення в розширенніObject\nConnectionState на пристрої",
-          "zh-cn": "独立性更新\n 设备上的对象\n连接状态已更改"
+      "1.1.1": {
+        "en": "Packages updated\nMinimum node.js version is 22.x",
+        "de": "Pakete aktualisiert\nMinimal node.js version ist 22.x",
+        "ru": "Обновленные пакеты\nМинимальная версия node.js - 22.x",
+        "pt": "Pacotes atualizados\nA versão mínima do node.js é 22.x",
+        "nl": "Pakketten bijgewerkt\nMinimale node.js versie is 22.x",
+        "fr": "Mise à jour des paquets\nLa version minimum node.js est 22.x",
+        "it": "Pacchetti aggiornati\nVersione minima node.js è 22.x",
+        "es": "Paquetes actualizados\nVersión mínima node.js es 22.x",
+        "pl": "Aktualizacja pakietów\nMinimalna node.js wersja 22.x",
+        "uk": "Пакети оновлені\nМінімальний вузол.js версія 22.x",
+        "zh-cn": "更新软件包\n最小节点.js版本为22.x"
+      },
+      "1.1.0": {
+        "en": "devDependencies updated\nChanged create in extendObject\nConnectionState on Device",
+        "de": "devDependencies aktualisiert\n Erstellen geändert in extendObject\nConnectionState auf Gerät",
+        "ru": "обновленная независимость\n Измененное создание в extendObject\nConnectionState на устройстве",
+        "pt": "devDependências atualizadas\n Criada alterada na extensãoObject\nConnectionState no dispositivo",
+        "nl": "devDependencies bijgewerkt\n Veranderd aanmaken in extendObject\nConnectionState op Apparaat",
+        "fr": "devDependences updated\n Changed create in extendObject\nConnectionState on Device",
+        "it": "sviluppoDependens aggiornato\n Modificato creare in extendObject\nConnectionState sul dispositivo",
+        "es": "devDependencies updated\n Cambios en la extensiónObject\nConnectionState on Device",
+        "pl": "devDependendences updated\n Zmieniono tworzenie w extendObject\nConnectionState na urządzeniu",
+        "uk": "devDepencies оновлений\n Змінено створення в розширенніObject\nConnectionState на пристрої",
+        "zh-cn": "独立性更新\n 设备上的对象\n连接状态已更改"
       },
       "1.0.3":{
         "en": "Fix npm publish\ndependencies updated",
