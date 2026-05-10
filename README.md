@@ -89,6 +89,8 @@ Von diesem Adapter wird auch das "Service Request" unterstützt, welches in eini
 ### 0.0.1
 * (Hirsch-DE) initial release
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 MIT License
 
