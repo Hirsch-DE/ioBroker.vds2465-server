@@ -1,6 +1,6 @@
 {
   "name": "iobroker.vds2465-server",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Empfänger von VdS2465-Meldungen",
   "author": {
     "name": "Hirsch-DE",
