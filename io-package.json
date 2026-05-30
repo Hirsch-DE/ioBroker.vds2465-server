@@ -29,7 +29,7 @@
         "uk": "devDepencies оновлений\n Змінено створення в розширенніObject\nConnectionState на пристрої",
         "zh-cn": "独立性更新\n 设备上的对象\n连接状态已更改"
       },
-      "1.0.3":{
+      "1.0.3": {
         "en": "Fix npm publish\ndependencies updated",
         "de": "Npm veröffentlichen\naktualisierte abhängigkeiten",
         "ru": "Издательство Fix npm\nобновленные зависимости",
@@ -42,7 +42,7 @@
         "uk": "Виправлення npm опублікування\nоновлені залежності",
         "zh-cn": "修复 npm 发布\n更新依赖关系"
       },
-      "1.0.2":{
+      "1.0.2": {
         "en": "Packages updated",
         "de": "Pakete aktualisiert",
         "ru": "Обновленные пакеты",
@@ -55,7 +55,7 @@
         "uk": "Пакети оновлені",
         "zh-cn": "更新软件包"
       },
-      "1.0.1":{
+      "1.0.1": {
         "en": "Packages updated\nDesign adaptation",
         "de": "Pakete aktualisiert\nDesign Anpassungen",
         "ru": "Обновленные пакеты\nНастройка дизайна",
@@ -68,7 +68,7 @@
         "uk": "Пакети оновлені\nНалаштування дизайну",
         "zh-cn": "更新软件包\n設計客製化"
       },
-      "1.0.0":{
+      "1.0.0": {
         "en": "Packages updated\nMinimum node.js version is 18.x",
         "de": "Pakete aktualisiert\nMinimal node.js version ist 18.x",
         "ru": "Обновленные пакеты\nМинимальная версия node.js - 18.x",
@@ -159,7 +159,6 @@
     "dataSource": "poll",
     "tier": 2,
     "messagebox": true,
-    "materialize": false,
     "materializeTab": false,
     "adminUI": {
       "config": "json"
