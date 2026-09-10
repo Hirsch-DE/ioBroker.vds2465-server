@@ -43,6 +43,10 @@ Von diesem Adapter wird auch das "Service Request" unterstützt, welches in eini
 
 
 ## Changelog
+### 1.1.2
+* (Hirsch-DE) devDependencies updated
+* (Hirsch-DE) Add node.js version 26 in testing
+* (Hirsch-DE) change setTimeout in this.setTimeout
 ### 1.1.1
 * (Hirsch-DE) Dependencies updated
 * (Hirsch-DE) Minimum node.js version is 22.x

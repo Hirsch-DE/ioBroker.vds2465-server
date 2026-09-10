@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vds2465-server",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "news": {
+      "1.1.2": {
+        "en": "devDependencies updated\nAdd node.js version 26 in testing\nchange setTimeout in this.setTimeout",
+        "de": "devAbhängigkeiten aktualisiert\nHinzufügen von node.js Version 26 im Test\nsetTimeout in this.setTimeout ändern",
+        "ru": "обновленная независимость\nДобавить node.js версию 26 в тестировании\nизменение setTimeout в этом.setTimeout",
+        "pt": "devDependências atualizadas\nAdicionar a versão 26 do nod.js no teste\nalterar setTimeout neste.setTimeout",
+        "nl": "devDependencies bijgewerkt\nNode.js versie 26 toevoegen aan testen\nsetTimeout wijzigen in deze.setTimeout",
+        "fr": "devDependences mises à jour\nAjouter node.js version 26 dans le test\nmodifier setTimeout dans ce.setTimeout",
+        "it": "devDependencies aggiornato\nAggiungere node.js versione 26 in prova\ncambiamento setTimeout in this.setTimeout",
+        "es": "devDependencies updated\nAñadir node.js versión 26 en pruebas\ncambiar setTimeout en este.setTimeout",
+        "pl": "devDependences updated\nDodaj node.js wersja 26 w testach\nchange setTimeout in this. setTimeout",
+        "uk": "devDepencies оновлений\nAdd node.js version 26 in тестування\nзмінити setTimeout в this.setTimeout",
+        "zh-cn": "更新相互依存关系\n在测试中添加节点.js 26版本\n更改设置"
+      },
       "1.1.1": {
         "en": "Packages updated\nMinimum node.js version is 22.x",
         "de": "Pakete aktualisiert\nMinimal node.js version ist 22.x",
@@ -80,32 +93,6 @@
         "pl": "Aktualizacja pakietów\nMinimalna node.js wersja 18.x",
         "uk": "Пакети оновлені\nМінімальний вузол.js версія 18.x",
         "zh-cn": "更新软件包\n最小节点.js版本为18.x"
-      },
-      "0.1.10": {
-        "en": "Fix VdSServiceRequest",
-        "de": "Fix VdSServiceRequest",
-        "ru": "Fix VdSServiceRequest",
-        "pt": "Corrigir VdSServiceRequest",
-        "nl": "Fix VdSServiceRequest",
-        "fr": "Correction de VdSServiceRequest",
-        "it": "Riparare VdSServiceRichiesta",
-        "es": "Fijar VdSServiceRequest",
-        "pl": "Fix VdSServiceRequest",
-        "uk": "Виправлення VdSServiceRequest",
-        "zh-cn": "修復 VdSServiceRequest"
-      },
-      "0.1.9": {
-        "en": "Fix for very fast connection establishment and connection termination messages",
-        "de": "Fix für sehr schnelle Verbindungsaufbau und Verbindungsabbruch Nachrichten",
-        "ru": "Исправление для очень быстрого создания соединения и сообщений о прекращении связи",
-        "pt": "Fix para estabelecimento de conexão muito rápido e mensagens de terminação de conexão",
-        "nl": "Oplossing voor zeer snelle verbindingsopbouw- en verbindingsbeëindigingsberichten",
-        "fr": "Correction pour les messages d'établissement de connexion très rapide et de résiliation de connexion",
-        "it": "Fissare per l'istituzione di connessione molto veloce e messaggi di terminazione di connessione",
-        "es": "Fijación para mensajes de terminación de conexión muy rápidos",
-        "pl": "Informacje na temat szybkiego połączenia i połączenia",
-        "uk": "Фіксація для дуже швидкого з'єднання та розірвання зв'язку повідомлень",
-        "zh-cn": "迅速建立联系和联系终止信息"
       }
     },
     "titleLang": {

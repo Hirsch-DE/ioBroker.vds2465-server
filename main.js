@@ -891,7 +891,7 @@ class Vds2465Server extends utils.Adapter {
     }
 
     Sleep(milliseconds) {
-        return new Promise(resolve => setTimeout(resolve, milliseconds));
+        return new Promise(resolve => this.setTimeout(resolve, milliseconds));
     }
 
     /**
